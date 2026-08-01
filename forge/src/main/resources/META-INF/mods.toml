@@ -1,0 +1,42 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+issueTrackerURL = "https://github.com/ProgrammerLP/Create-TrackSta/issues"
+license = "AGPL-3"
+
+[[mods]]
+modId = "tracksta"
+version = "${version}"
+displayName = "Create TrackSta"
+authors = "ProgrammerLP"
+description = '''
+Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks and Noise Isolation Walls.
+'''
+logoFile = "mod_icon.png"
+
+[[dependencies.tracksta]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.tracksta]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.tracksta]]
+modId = "architectury"
+mandatory = true
+versionRange = "[9.2.14,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.tracksta]]
+modId="create"
+mandatory=true
+versionRange="[0.5.1.f,]"
+ordering="NONE"
+side="BOTH"

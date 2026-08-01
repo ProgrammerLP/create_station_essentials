@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "tracksta",
+  "version": "${version}",
+  "name": "Create TrackSta",
+  "description": "Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks and Noise Isolation Walls.",
+  "authors": [
+    "ProgrammerLP"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "AGPL-3",
+  "icon": "mod_icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.adeptstack.cts.fabric.MainFabric"
+    ],
+    "client": [
+      "net.adeptstack.cts.fabric.client.MainFabricClient"
+    ],
+    "fabric-datagen": [
+      "net.adeptstack.Core.Data.CTUFabricData"
+    ]
+  },
+  "mixins": [
+    "tracksta.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "architectury": ">=9.2.14",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "railways": ">=1.7.0"
+  }
+}

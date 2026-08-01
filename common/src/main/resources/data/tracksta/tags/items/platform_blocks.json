@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "tracksta:de_platform_block",
+    "tracksta:nl_platform_block",
+    "tracksta:ch_platform_block"
+  ]
+}

@@ -19,7 +19,7 @@ public class PlatformBlockScreenBase extends Screen {
 
     public static final int NO_VARIANT_SELECTED = -1;
 
-    private static final ResourceLocation texture = new ResourceLocation(MOD_ID, "textures/gui/selection_screen.png");
+    private static final ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/gui/selection_screen.png");
     private static final int TEXTURE_WIDTH = 256;
     private static final int TEXTURE_HEIGHT = 256;
     private static final int WINDOW_WIDTH = 218;
@@ -120,18 +120,22 @@ public class PlatformBlockScreenBase extends Screen {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(guiGraphics);
+        super.render(guiGraphics, mouseX, mouseY, partialTick); // Buttons, etc.
+        if (preview != null) {
+            guiGraphics.blit(preview.location(), guiLeft + MARGIN_LEFT, guiTop + WINDOW_TOP_PART_HEIGHT + maxRows * BlockButton.DEFAULT_HEIGHT + 4, PREVIEW_ICON_SIZE, PREVIEW_ICON_SIZE, 0, 0, preview.textureWidth(), preview.textureHeight(), preview.textureWidth(), preview.textureHeight()); // Preview Icon
+        }
+        guiGraphics.drawString(font, title, width / 2 - font.width(title) / 2, guiTop + 6, 0xFF404040, false);
+    }
+
+    @Override
+    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blit(texture, guiLeft, guiTop, WINDOW_WIDTH, WINDOW_TOP_PART_HEIGHT, 0, 0, WINDOW_WIDTH, WINDOW_TOP_PART_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT); // Window Top
         for (int i = 0; i < maxRows; i++) {
             guiGraphics.blit(texture, guiLeft, guiTop + WINDOW_TOP_PART_HEIGHT + i * BlockButton.DEFAULT_HEIGHT, WINDOW_WIDTH, BlockButton.DEFAULT_HEIGHT, 0, WINDOW_BUTTON_AREA_Y, WINDOW_WIDTH, BlockButton.DEFAULT_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT); // Window Body
         }
         guiGraphics.blit(texture, guiLeft, guiTop + WINDOW_TOP_PART_HEIGHT + maxRows * BlockButton.DEFAULT_HEIGHT, WINDOW_WIDTH, WINDOW_BOTTOM_PART_HEIGHT, 0, WINDOW_BOTTOM_PART_Y, WINDOW_WIDTH, WINDOW_BOTTOM_PART_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT); // Window Bottom
 
-        if (preview != null) {
-            guiGraphics.blit(preview.location(), guiLeft + MARGIN_LEFT, guiTop + WINDOW_TOP_PART_HEIGHT + maxRows * BlockButton.DEFAULT_HEIGHT + 4, PREVIEW_ICON_SIZE, PREVIEW_ICON_SIZE, 0, 0, preview.textureWidth(), preview.textureHeight(), preview.textureWidth(), preview.textureHeight()); // Preview Icon
-        }
-        super.render(guiGraphics, mouseX, mouseY, partialTick); // Buttons, etc.
-        guiGraphics.drawString(font, title, width / 2 - font.width(title) / 2, guiTop + 6, 0xFF404040, false);
     }
 
     public static final record TextureResult(ResourceLocation location, int textureWidth, int textureHeight) {}

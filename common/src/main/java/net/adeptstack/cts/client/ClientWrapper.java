@@ -1,5 +1,6 @@
 package net.adeptstack.cts.client;
 
+import de.mrjulsen.mcdragonlib.network.NetworkDirection;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
@@ -26,9 +27,9 @@ public class ClientWrapper {
                         PlatformBlockDE.SIGN_BLOCKS,
                         (variant) -> {
                             String name = TextureNames.GetDEPlatformBlockTextureName(variant);
-                            return new PlatformBlockDEPlacementScreen.TextureResult(new ResourceLocation(MOD_ID, "textures/block/platformblocks/" + name), 256, 256);
+                            return new PlatformBlockDEPlacementScreen.TextureResult(ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/block/platformblocks/" + name), 256, 256);
                         }, (variant) -> {
-                    ModNetwork.CHANNEL.sendToServer(new PlatformBlockPacket(pos, variant));
+                                ModNetwork.PLATFORM_PACKET.send(NetworkDirection.toServer(), new PlatformBlockPacket(pos, variant));
                         },
                         "gui." + MOD_ID + ".selection_screen.blockplacementscreen_de", 1
                 )
@@ -42,9 +43,11 @@ public class ClientWrapper {
                         PlatformBlockNL.SIGN_BLOCKS,
                         (variant) -> {
                             String name = TextureNames.GetNLPlatformBlockTextureName(variant);
-                            return new PlatformBlockNLPlacementScreen.TextureResult(new ResourceLocation(MOD_ID, "textures/block/nl_platformblocks/" + name), 256, 256);
+                            return new PlatformBlockNLPlacementScreen.TextureResult(ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/block/nl_platformblocks/" + name), 256, 256);
                         }, (variant) -> {
-                    ModNetwork.CHANNEL.sendToServer(new PlatformBlockPacket(pos, variant));
+                            if (pos != null) {
+                                ModNetwork.PLATFORM_PACKET.send(NetworkDirection.toServer(), new PlatformBlockPacket(pos, variant));
+                            }
                         },
                         "gui." + MOD_ID + ".selection_screen.blockplacementscreen_nl", 2
                 )
@@ -58,9 +61,11 @@ public class ClientWrapper {
                         PlatformBlockCH.SIGN_BLOCKS,
                         (variant) -> {
                             String name = TextureNames.GetCHPlatformBlockTextureName(variant);
-                            return new PlatformBlockCHPlacementScreen.TextureResult(new ResourceLocation(MOD_ID, "textures/block/ch_platformblocks/" + name), 256, 256);
+                            return new PlatformBlockCHPlacementScreen.TextureResult(ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/block/ch_platformblocks/" + name), 256, 256);
                         }, (variant) -> {
-                    ModNetwork.CHANNEL.sendToServer(new PlatformBlockPacket(pos, variant));
+                            if (pos != null) {
+                                ModNetwork.PLATFORM_PACKET.send(NetworkDirection.toServer(), new PlatformBlockPacket(pos, variant));
+                            }
                         },
                     "gui." + MOD_ID + ".selection_screen.blockplacementscreen_ch", 3
                 )

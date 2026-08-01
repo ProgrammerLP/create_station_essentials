@@ -1,8 +1,8 @@
-package net.adeptstack.cts.fabric;
+package net.adeptstack.fabric;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.adeptstack.cts.Main;
+import net.adeptstack.Main;
 
 public final class MainFabric implements ModInitializer {
     @Override

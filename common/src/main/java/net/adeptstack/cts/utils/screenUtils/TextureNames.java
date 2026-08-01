@@ -55,4 +55,34 @@ public class TextureNames {
         };
         return name;
     }
+
+    public static String GetDoorTextureName(int variant) {
+        String name = switch (variant) {
+            case 0 -> "door_andesite_alloy_window.png";
+            case 1 -> "barrier.png";
+            case 2 -> "door_ice.png";
+            case 3 -> "door_ic2.png";
+            case 4 -> "door_rrx.png";
+            case 5 -> "door_flirt.png";
+            case 6 -> "door_sw_nyc.png";
+            case 7 -> "door_pkp_ic_blue.png";
+            case 8 -> "door_ic.png";
+            case 9 -> "door_elev_glass.png";
+            case 10 -> "door_london_1973_stock.png";
+            case 11 -> "door_london_s7_stock.png";
+            case 12 -> "door_london_overground.png";
+            case 13 -> "door_railjet.png";
+            case 14 -> "door_sbahn_cologne.png";
+            case 15 -> "door_talent3.png";
+            case 16 -> "door_warsaw_tram.png";
+            case 17 -> "door_warsaw_tram.png";
+            case 18 -> "door_ice_modern.png";
+            case 19 -> "door_class_350.png";
+            case 20 -> "door_class_390.png";
+            case 21 -> "door_class_450.png";
+            case 22 -> "door_1996_stock.png";
+            default -> "door_ic2.png";
+        };
+        return name;
+    }
 }

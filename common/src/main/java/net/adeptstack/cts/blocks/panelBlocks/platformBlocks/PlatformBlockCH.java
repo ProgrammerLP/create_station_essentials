@@ -2,13 +2,9 @@ package net.adeptstack.cts.blocks.panelBlocks.platformBlocks;
 
 import net.adeptstack.cts.blocks.panelBlocks.PanelBlockBase;
 import net.adeptstack.cts.client.ClientWrapper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,20 +30,9 @@ public class PlatformBlockCH extends PanelBlockBase {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
-            if (serverPlayer.gameMode.getGameModeForPlayer() == GameType.ADVENTURE) {
-                return InteractionResult.PASS;
-            }
-        }
-
-        if (level.isClientSide()) {
-            if (Minecraft.getInstance().gameMode != null && Minecraft.getInstance().gameMode.getPlayerMode() != GameType.ADVENTURE) {
-                ClientWrapper.openPlatformBlockCHScreen(pos, state);
-                return InteractionResult.SUCCESS;
-            } else {
-                return InteractionResult.PASS;
-            }
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        if (level.isClientSide) {
+            ClientWrapper.openPlatformBlockCHScreen(pos, state);
         }
         return InteractionResult.SUCCESS;
     }

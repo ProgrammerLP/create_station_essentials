@@ -10,5 +10,5 @@ pluginManagement {
 rootProject.name = 'tracksta'
 
 include 'common'
-include 'fabric'
-include 'forge'
+// include 'fabric'
+include 'neoforge'

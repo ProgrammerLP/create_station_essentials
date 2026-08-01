@@ -1,7 +1,7 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
-issueTrackerURL = "https://github.com/ProgrammerLP/Create-TrackSta/issues"
-license = "AGPL-3"
+loaderVersion = "[4,)"
+#issueTrackerURL = ""
+license = "GNU General Public License v3.0"
 
 [[mods]]
 modId = "tracksta"
@@ -14,29 +14,40 @@ Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks
 logoFile = "mod_icon.png"
 
 [[dependencies.tracksta]]
-modId = "forge"
-mandatory = true
-versionRange = "[47,)"
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.tracksta]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.20.1,)"
+type = "required"
+versionRange = "[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.tracksta]]
 modId = "architectury"
-mandatory = true
-versionRange = "[9.2.14,)"
+type = "required"
+versionRange = "[13.0.8,)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies.tracksta]]
+modId = "dragonlib"
+type = "required"
+versionRange = "[beta-3.0.23,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.tracksta]]
-modId="create"
-mandatory=true
-versionRange="[0.5.1.f,]"
-ordering="NONE"
-side="BOTH"
+modId = "create"
+type = "required"
+versionRange = "[6.0.7,]"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "tracksta.mixins.json"
+

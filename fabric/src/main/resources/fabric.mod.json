@@ -22,7 +22,7 @@
       "net.adeptstack.cts.fabric.client.MainFabricClient"
     ],
     "fabric-datagen": [
-      "net.adeptstack.Core.Data.CTUFabricData"
+      "net.adeptstack.cts.Core.Data.CTUFabricData"
     ]
   },
   "mixins": [
@@ -36,6 +36,6 @@
     "fabric-api": "*"
   },
   "suggests": {
-    "railways": ">=1.7.0"
+    "another-mod": "*"
   }
 }

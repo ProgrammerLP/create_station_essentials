@@ -10,10 +10,9 @@ import net.minecraft.world.level.material.MapColor;
 
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static net.adeptstack.cts.Main.REGISTRATE;
-import static net.adeptstack.cts.registry.ModTabs.TRACKSTA_TAB;
 
 @SuppressWarnings({"unused","removal"})
-public class TrackStaBuilderTransformers {
+public class TrackstaBuilderTransformers {
 
     public static BlockEntry<PlatformBlockDE> DEPlatformBlock(String id, MapColor color) {
         return REGISTRATE
@@ -22,11 +21,8 @@ public class TrackStaBuilderTransformers {
                 .properties(p -> p.mapColor(color)
                         .sound(SoundType.METAL))
                 .transform(pickaxeOnly())
-                .tag(ModTags.AllBlockTags.PLATFORM_BLOCKS.tag)
                 .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
                 .item()
-                .tag(ModTags.AllItemTags.PLATFORM_BLOCKS.tag)
-                .tab(TRACKSTA_TAB.getKey())
                 .build()
                 .register();
     }
@@ -38,11 +34,8 @@ public class TrackStaBuilderTransformers {
                 .properties(p -> p.mapColor(color)
                         .sound(SoundType.METAL))
                 .transform(pickaxeOnly())
-                .tag(ModTags.AllBlockTags.PLATFORM_BLOCKS.tag)
                 .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
                 .item()
-                .tag(ModTags.AllItemTags.PLATFORM_BLOCKS.tag)
-                .tab(TRACKSTA_TAB.getKey())
                 .build()
                 .register();
     }
@@ -54,11 +47,8 @@ public class TrackStaBuilderTransformers {
                 .properties(p -> p.mapColor(color)
                         .sound(SoundType.METAL))
                 .transform(pickaxeOnly())
-                .tag(ModTags.AllBlockTags.PLATFORM_BLOCKS.tag)
                 .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
                 .item()
-                .tag(ModTags.AllItemTags.PLATFORM_BLOCKS.tag)
-                .tab(TRACKSTA_TAB.getKey())
                 .build()
                 .register();
     }
@@ -69,10 +59,8 @@ public class TrackStaBuilderTransformers {
                 .initialProperties(() -> Blocks.GLASS)
                 .properties(p -> p.sound(SoundType.STONE).mapColor(color))
                 .transform(pickaxeOnly())
-                .tag(ModTags.AllBlockTags.FRAMEABLE.tag)
                 .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
                 .item()
-                .tab(TRACKSTA_TAB.getKey())
                 .build()
                 .register();
     }
@@ -86,7 +74,6 @@ public class TrackStaBuilderTransformers {
                 .transform(pickaxeOnly())
                 .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
                 .item()
-                .tab(TRACKSTA_TAB.getKey())
                 .build()
                 .register();
     }

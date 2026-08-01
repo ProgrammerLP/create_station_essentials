@@ -1,6 +1,6 @@
-<img alt="cover" style="border-radius: 15px;" width="100%" src="https://cdn.modrinth.com/data/cached_images/">
+<img style="border-radius: 15px;" alt="cover" width="100%" src="https://cdn.modrinth.com/data/cached_images/">
 
-Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks and Noise Isolation Walls.
+Mod that adds custom sliding doors with realistic opening & closing sounds and station blocks, and also building blocks for stations and trains.
 
 <a href="https://discord.gg/DkcprwueFj" title="Feel free to join our discord to see development updates and give feedback!">
 <img style="border-radius: 15px;" src="https://discord.com/api/guilds/1248636479627071488/widget.png?style=banner2">
@@ -21,7 +21,7 @@ Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks
 ... and MORE! 
 <br>
 
-### Noise Isolation Walls
+### Platform Blocks
 <div style="display: flex;">
 <img style="border-radius: 15px;" width="49.5%" height="auto" src="https://cdn.modrinth.com/data/cached_images/61ac8022a74457ccbd7475b924eed414b2e49c03.png" alt="img_one">
 
@@ -30,7 +30,11 @@ Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks
 ... and MORE! 
 <br>
 
-
+### More Features
+- Opening & Closing sounds
+- auto closing doors
+- doors can be controlled on all carriages
+- and more!
 
 ## Languages
 - English
@@ -44,4 +48,4 @@ Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks
 You should always back up your world before installing a mod update to protect your world from damage.
 
 ## Credits
-ProgrammerLP, OneLink and all translators!
+ProgrammerLP, OneLink and all Translators!

@@ -1,16 +1,24 @@
 package net.adeptstack.cts.network;
 
-import dev.architectury.networking.NetworkChannel;
+import de.mrjulsen.mcdragonlib.network.DLNetworkManager;
+import de.mrjulsen.mcdragonlib.network.NetworkDirection;
+import de.mrjulsen.mcdragonlib.network.NetworkPacketType;
+import de.mrjulsen.mcdragonlib.util.DLUtils;
 import net.adeptstack.cts.network.packets.PlatformBlockPacket;
-import net.minecraft.resources.ResourceLocation;
 
 import static net.adeptstack.cts.Main.MOD_ID;
 
 public class ModNetwork {
 
-    public static final NetworkChannel CHANNEL = NetworkChannel.create(new ResourceLocation(MOD_ID, MOD_ID + "_network"));
+    public static final DLNetworkManager CTU_NETWORK_MANAGER = new DLNetworkManager(DLUtils.resourceLocation(MOD_ID, MOD_ID + "_network"), "v1");
 
-    public static void init() {
-        CHANNEL.register(PlatformBlockPacket.class, PlatformBlockPacket::encode, PlatformBlockPacket::new, PlatformBlockPacket::apply);
-    }
+    public static final NetworkPacketType.Send<NetworkDirection.C2S, PlatformBlockPacket> PLATFORM_PACKET =
+            CTU_NETWORK_MANAGER.registerSendOnlyPacket(
+                    "send_platform_packet",
+                    NetworkDirection.C2S,
+                    PlatformBlockPacket::handle,
+                    PlatformBlockPacket::new
+            );
+
+    public static void networkInit() { }
 }

@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "minecraft:iron_block"
   },
-  "result": "tracksta:iso_wall_block_green",
-  "count": 2
+  "result": {
+    "id": "tracksta:nl_platform_block",
+    "count": 8
+  }
 }

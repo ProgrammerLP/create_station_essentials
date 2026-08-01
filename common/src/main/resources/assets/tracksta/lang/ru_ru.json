@@ -1,0 +1,16 @@
+{
+  "block.tracksta.iso_wall_block": "Звуко изоляциионная стена",
+  "block.tracksta.iso_wall_block_green": "Звуко изоляциионная стена (зелёный)",
+
+  "block.tracksta.de_platform_block": "Блок немецкой платформы",
+  "block.tracksta.nl_platform_block": "Блок голландской платформы",
+  "block.tracksta.ch_platform_block": "Блок швейцарской платформы",
+
+  "advancement.tracksta.platform_block": "Современный век",
+  "advancement.tracksta.platform_block.description": "Получить блок платформы",
+
+  "itemGroup.tracksta.tracksta_tab": "Create TrackSTa",
+  "gui.tracksta.selection_screen.blockplacementscreen_de": "Блоки немецких платформ",
+  "gui.tracksta.selection_screen.blockplacementscreen_nl": "Блоки голландских платформ",
+  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Блоки швейцарских платформ"
+}

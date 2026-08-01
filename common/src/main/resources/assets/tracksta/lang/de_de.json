@@ -1,0 +1,16 @@
+{
+  "block.tracksta.iso_wall_block": "Schallschutzwand",
+  "block.tracksta.iso_wall_block_green": "Schallschutzwand (Grün)",
+
+  "block.tracksta.de_platform_block": "Deutscher Gleisblock",
+  "block.tracksta.nl_platform_block": "Niederländischer Gleisblock",
+  "block.tracksta.ch_platform_block": "Schweizer Gleisblock",
+
+  "advancement.tracksta.platform_block": "Modernes Zeitalter!",
+  "advancement.tracksta.platform_block.description": "Erhalte einen Plattformblock",
+
+  "itemGroup.tracksta.tracksta_tab": "Create TrackSta",
+  "gui.tracksta.selection_screen.blockplacementscreen_de": "Deutsche Gleisblöcke",
+  "gui.tracksta.selection_screen.blockplacementscreen_nl": "Niederländische Gleisblöcke",
+  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Schweizer Gleisblöcke"
+}

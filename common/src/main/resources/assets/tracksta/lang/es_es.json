@@ -1,0 +1,16 @@
+{
+  "block.tracksta.iso_wall_block": "Muro de aislamiento acústico",
+  "block.tracksta.iso_wall_block_green": "Muro de aislamiento acústico (Verde)",
+
+  "block.tracksta.de_platform_block": "Bloque de andén alemán",
+  "block.tracksta.nl_platform_block": "Bloque de andén holandés",
+  "block.tracksta.ch_platform_block": "Bloque de andén suizo",
+
+  "advancement.tracksta.platform_block": "¡Era moderna!",
+  "advancement.tracksta.platform_block.description": "Recibe un bloque de andén",
+
+  "itemGroup.tracksta.tracksta_tab": "Create TrackSTa",
+  "gui.tracksta.selection_screen.blockplacementscreen_de": "Bloques de andén alemán",
+  "gui.tracksta.selection_screen.blockplacementscreen_nl": "Bloques de andén holandés",
+  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Bloques de andén suizo"
+}

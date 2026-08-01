@@ -1,0 +1,16 @@
+{
+  "block.tracksta.iso_wall_block": "隔音墙",
+  "block.tracksta.iso_wall_block_green": "隔音墙（绿色）",
+
+  "block.tracksta.de_platform_block": "德式站台方块",
+  "block.tracksta.nl_platform_block": "荷式站台方块",
+  "block.tracksta.ch_platform_block": "瑞士式站台方块",
+
+  "advancement.tracksta.platform_block": "现代时代！",
+  "advancement.tracksta.platform_block.description": "获得一个站台方块",
+
+  "itemGroup.tracksta.tracksta_tab": "Create TrackSTa",
+  "gui.tracksta.selection_screen.blockplacementscreen_de": "德式站台方块",
+  "gui.tracksta.selection_screen.blockplacementscreen_nl": "荷式站台方块",
+  "gui.tracksta.selection_screen.blockplacementscreen_ch": "瑞士式站台方块"
+}

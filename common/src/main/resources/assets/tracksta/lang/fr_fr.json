@@ -1,0 +1,18 @@
+{
+  "block.tracksta.iso_wall_block": "Mur d'isolation phonique",
+  "block.tracksta.iso_wall_block_green": "Mur d'isolation phonique (Vert)",
+
+  "block.tracksta.de_platform_block": "Panneau de quai allemand",
+  "block.tracksta.nl_platform_block": "Panneau de quai néerlandais",
+  "block.tracksta.ch_platform_block": "Panneau de quai suisse",
+
+
+
+  "advancement.tracksta.platform_block": "L'ère moderne !",
+  "advancement.tracksta.platform_block.description": "Recevoir un panneau de quai",
+
+  "itemGroup.tracksta.tracksta_tab": "Create TrackSTa",
+  "gui.tracksta.selection_screen.blockplacementscreen_de": "Panneau de quai allemand",
+  "gui.tracksta.selection_screen.blockplacementscreen_nl": "Panneau de quai néerlandais",
+  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Panneau de quai suisse"
+}

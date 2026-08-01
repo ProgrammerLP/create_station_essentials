@@ -1,0 +1,15 @@
+{
+  "block.tracksta.iso_wall_block": "Protihluková zeď",
+  "block.tracksta.iso_wall_block_green": "Protihluková stěna (zelená)",
+  
+  "block.tracksta.de_platform_block": "Blok čísla nástupiště z Německa",
+  "block.tracksta.nl_platform_block": "Blok čísla nástupišté z Nizozemska",
+  "block.tracksta.ch_platform_block": "Blok čísla nástupiště ze Švýcarska",
+  
+  "advancement.tracksta.platform_block": "Moderní Doba",
+  "advancement.tracksta.platform_block.description": "Získejte blok čísla nástupiště",
+  "itemGroup.tracksta.tracksta_tab": "Create TrackSta",
+  "gui.tracksta.selection_screen.blockplacementscreen_de": "Blok německého čísla nástupiště",
+  "gui.tracksta.selection_screen.blockplacementscreen_nl": "Blok nizozemského čísla nástupiště",
+  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Blok švýcarského čísla nástupiště"
+}

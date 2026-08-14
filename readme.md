@@ -44,4 +44,4 @@ Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks
 You should always back up your world before installing a mod update to protect your world from damage.
 
 ## Credits
-ProgrammerLP, OneLink and all translators!
+ProgrammerLP, CircuitScout and all translators!

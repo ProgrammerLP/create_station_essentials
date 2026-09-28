@@ -5,9 +5,11 @@ import net.adeptstack.cts.blocks.panelBlocks.IsoWallBlock;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
-import net.adeptstack.cts.blocks.signBlocks.StationSignBlock;
+import net.adeptstack.cts.blocks.signBlocks.MastStationSignBlock;
+import net.adeptstack.cts.blocks.signBlocks.WallStationSignBlock;
 import net.adeptstack.cts.blocks.signBlocks.StationSignDoubleBlock;
 import net.adeptstack.cts.blocks.signBlocks.StationSignMastBlock;
+import net.adeptstack.cts.client.renderer.MastStationSignBlockColor;
 import net.adeptstack.cts.client.renderer.StationSignDoubleBlockColor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.MapColor;
@@ -57,9 +59,9 @@ public class TrackstaBuilderTransformers {
                 .register();
     }
 
-    public static BlockEntry<StationSignBlock> StationSignBlock(String id, MapColor color) {
+    public static BlockEntry<WallStationSignBlock> WallStationSignBlock(String id, MapColor color) {
         return REGISTRATE
-                .block(id, StationSignBlock::new)
+                .block(id, WallStationSignBlock::new)
                 .initialProperties(() -> Blocks.IRON_BARS)
                 .properties(p -> p.mapColor(color)
                         .sound(SoundType.METAL)
@@ -95,6 +97,22 @@ public class TrackstaBuilderTransformers {
                         .noOcclusion()
                         .strength(2.0F))
                 .color(() -> StationSignDoubleBlockColor::new)
+                .transform(pickaxeOnly())
+                .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
+                .item()
+                .build()
+                .register();
+    }
+
+    public static BlockEntry<MastStationSignBlock> MastStationSignBlock(String id, MapColor color) {
+        return REGISTRATE
+                .block(id, MastStationSignBlock::new)
+                .initialProperties(() -> Blocks.IRON_BARS)
+                .properties(p -> p.mapColor(color)
+                        .sound(SoundType.METAL)
+                        .noOcclusion()
+                        .strength(2.0F))
+                .color(() -> MastStationSignBlockColor::new)
                 .transform(pickaxeOnly())
                 .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
                 .item()

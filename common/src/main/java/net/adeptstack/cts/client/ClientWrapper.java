@@ -1,15 +1,17 @@
 package net.adeptstack.cts.client;
 
 import de.mrjulsen.mcdragonlib.network.NetworkDirection;
-import net.adeptstack.cts.blockentities.StationSignBlockEntity;
+import net.adeptstack.cts.blockentities.MastStationSignBlockEntity;
+import net.adeptstack.cts.blockentities.WallStationSignBlockEntity;
 import net.adeptstack.cts.blockentities.StationSignDoubleBlockEntity;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
 import net.adeptstack.cts.network.ModNetwork;
+import net.adeptstack.cts.network.packets.MastStationSignPacket;
 import net.adeptstack.cts.network.packets.PlatformBlockPacket;
 import net.adeptstack.cts.network.packets.StationSignDoublePacket;
-import net.adeptstack.cts.network.packets.StationSignPacket;
+import net.adeptstack.cts.network.packets.WallStationSignPacket;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockCHPlacementScreen;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockDEPlacementScreen;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockNLPlacementScreen;
@@ -79,13 +81,25 @@ public class ClientWrapper {
     }
 
     //Station Sign Screen
-    public static void openStationSignScreen(BlockPos pos, BlockState blockState, StationSignBlockEntity blockEntity) {
+    public static void openStationSignScreen(BlockPos pos, BlockState blockState, WallStationSignBlockEntity blockEntity) {
         Minecraft.getInstance().setScreen(
                 new StationSignScreen(
                         blockEntity.getText(),
                         blockEntity.getTextColor(),
-                        blockState.getValue(net.adeptstack.cts.blocks.signBlocks.StationSignBlock.BG_COLOR),
-                        (text, textColor, bgColor) -> ModNetwork.STATION_SIGN_PACKET.send(NetworkDirection.toServer(), new StationSignPacket(pos, text, textColor, bgColor))
+                        blockState.getValue(net.adeptstack.cts.blocks.signBlocks.WallStationSignBlock.BG_COLOR),
+                        (text, textColor, bgColor) -> ModNetwork.WALL_STATION_SIGN_PACKET.send(NetworkDirection.toServer(), new WallStationSignPacket(pos, text, textColor, bgColor))
+                )
+        );
+    }
+
+    //Mast Station Sign Screen
+    public static void openMastStationSignScreen(BlockPos pos, MastStationSignBlockEntity blockEntity) {
+        Minecraft.getInstance().setScreen(
+                new StationSignScreen(
+                        blockEntity.getText(),
+                        blockEntity.getTextColor(),
+                        blockEntity.getBgColor(),
+                        (text, textColor, bgColor) -> ModNetwork.MAST_STATION_SIGN_PACKET.send(NetworkDirection.toServer(), new MastStationSignPacket(pos, text, textColor, bgColor))
                 )
         );
     }

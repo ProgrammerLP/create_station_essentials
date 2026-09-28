@@ -1,0 +1,244 @@
+{
+  "variants": {
+    "facing=north,bg_color=white": {
+      "model": "tracksta:block/wall_station_sign_block/white"
+    },
+    "facing=north,bg_color=orange": {
+      "model": "tracksta:block/wall_station_sign_block/orange"
+    },
+    "facing=north,bg_color=magenta": {
+      "model": "tracksta:block/wall_station_sign_block/magenta"
+    },
+    "facing=north,bg_color=light_blue": {
+      "model": "tracksta:block/wall_station_sign_block/light_blue"
+    },
+    "facing=north,bg_color=yellow": {
+      "model": "tracksta:block/wall_station_sign_block/yellow"
+    },
+    "facing=north,bg_color=lime": {
+      "model": "tracksta:block/wall_station_sign_block/lime"
+    },
+    "facing=north,bg_color=pink": {
+      "model": "tracksta:block/wall_station_sign_block/pink"
+    },
+    "facing=north,bg_color=gray": {
+      "model": "tracksta:block/wall_station_sign_block/gray"
+    },
+    "facing=north,bg_color=light_gray": {
+      "model": "tracksta:block/wall_station_sign_block/light_gray"
+    },
+    "facing=north,bg_color=cyan": {
+      "model": "tracksta:block/wall_station_sign_block/cyan"
+    },
+    "facing=north,bg_color=purple": {
+      "model": "tracksta:block/wall_station_sign_block/purple"
+    },
+    "facing=north,bg_color=blue": {
+      "model": "tracksta:block/wall_station_sign_block/blue"
+    },
+    "facing=north,bg_color=brown": {
+      "model": "tracksta:block/wall_station_sign_block/brown"
+    },
+    "facing=north,bg_color=green": {
+      "model": "tracksta:block/wall_station_sign_block/green"
+    },
+    "facing=north,bg_color=red": {
+      "model": "tracksta:block/wall_station_sign_block/red"
+    },
+    "facing=north,bg_color=black": {
+      "model": "tracksta:block/wall_station_sign_block/black"
+    },
+    "facing=south,bg_color=white": {
+      "model": "tracksta:block/wall_station_sign_block/white",
+      "y": 180
+    },
+    "facing=south,bg_color=orange": {
+      "model": "tracksta:block/wall_station_sign_block/orange",
+      "y": 180
+    },
+    "facing=south,bg_color=magenta": {
+      "model": "tracksta:block/wall_station_sign_block/magenta",
+      "y": 180
+    },
+    "facing=south,bg_color=light_blue": {
+      "model": "tracksta:block/wall_station_sign_block/light_blue",
+      "y": 180
+    },
+    "facing=south,bg_color=yellow": {
+      "model": "tracksta:block/wall_station_sign_block/yellow",
+      "y": 180
+    },
+    "facing=south,bg_color=lime": {
+      "model": "tracksta:block/wall_station_sign_block/lime",
+      "y": 180
+    },
+    "facing=south,bg_color=pink": {
+      "model": "tracksta:block/wall_station_sign_block/pink",
+      "y": 180
+    },
+    "facing=south,bg_color=gray": {
+      "model": "tracksta:block/wall_station_sign_block/gray",
+      "y": 180
+    },
+    "facing=south,bg_color=light_gray": {
+      "model": "tracksta:block/wall_station_sign_block/light_gray",
+      "y": 180
+    },
+    "facing=south,bg_color=cyan": {
+      "model": "tracksta:block/wall_station_sign_block/cyan",
+      "y": 180
+    },
+    "facing=south,bg_color=purple": {
+      "model": "tracksta:block/wall_station_sign_block/purple",
+      "y": 180
+    },
+    "facing=south,bg_color=blue": {
+      "model": "tracksta:block/wall_station_sign_block/blue",
+      "y": 180
+    },
+    "facing=south,bg_color=brown": {
+      "model": "tracksta:block/wall_station_sign_block/brown",
+      "y": 180
+    },
+    "facing=south,bg_color=green": {
+      "model": "tracksta:block/wall_station_sign_block/green",
+      "y": 180
+    },
+    "facing=south,bg_color=red": {
+      "model": "tracksta:block/wall_station_sign_block/red",
+      "y": 180
+    },
+    "facing=south,bg_color=black": {
+      "model": "tracksta:block/wall_station_sign_block/black",
+      "y": 180
+    },
+    "facing=west,bg_color=white": {
+      "model": "tracksta:block/wall_station_sign_block/white",
+      "y": 270
+    },
+    "facing=west,bg_color=orange": {
+      "model": "tracksta:block/wall_station_sign_block/orange",
+      "y": 270
+    },
+    "facing=west,bg_color=magenta": {
+      "model": "tracksta:block/wall_station_sign_block/magenta",
+      "y": 270
+    },
+    "facing=west,bg_color=light_blue": {
+      "model": "tracksta:block/wall_station_sign_block/light_blue",
+      "y": 270
+    },
+    "facing=west,bg_color=yellow": {
+      "model": "tracksta:block/wall_station_sign_block/yellow",
+      "y": 270
+    },
+    "facing=west,bg_color=lime": {
+      "model": "tracksta:block/wall_station_sign_block/lime",
+      "y": 270
+    },
+    "facing=west,bg_color=pink": {
+      "model": "tracksta:block/wall_station_sign_block/pink",
+      "y": 270
+    },
+    "facing=west,bg_color=gray": {
+      "model": "tracksta:block/wall_station_sign_block/gray",
+      "y": 270
+    },
+    "facing=west,bg_color=light_gray": {
+      "model": "tracksta:block/wall_station_sign_block/light_gray",
+      "y": 270
+    },
+    "facing=west,bg_color=cyan": {
+      "model": "tracksta:block/wall_station_sign_block/cyan",
+      "y": 270
+    },
+    "facing=west,bg_color=purple": {
+      "model": "tracksta:block/wall_station_sign_block/purple",
+      "y": 270
+    },
+    "facing=west,bg_color=blue": {
+      "model": "tracksta:block/wall_station_sign_block/blue",
+      "y": 270
+    },
+    "facing=west,bg_color=brown": {
+      "model": "tracksta:block/wall_station_sign_block/brown",
+      "y": 270
+    },
+    "facing=west,bg_color=green": {
+      "model": "tracksta:block/wall_station_sign_block/green",
+      "y": 270
+    },
+    "facing=west,bg_color=red": {
+      "model": "tracksta:block/wall_station_sign_block/red",
+      "y": 270
+    },
+    "facing=west,bg_color=black": {
+      "model": "tracksta:block/wall_station_sign_block/black",
+      "y": 270
+    },
+    "facing=east,bg_color=white": {
+      "model": "tracksta:block/wall_station_sign_block/white",
+      "y": 90
+    },
+    "facing=east,bg_color=orange": {
+      "model": "tracksta:block/wall_station_sign_block/orange",
+      "y": 90
+    },
+    "facing=east,bg_color=magenta": {
+      "model": "tracksta:block/wall_station_sign_block/magenta",
+      "y": 90
+    },
+    "facing=east,bg_color=light_blue": {
+      "model": "tracksta:block/wall_station_sign_block/light_blue",
+      "y": 90
+    },
+    "facing=east,bg_color=yellow": {
+      "model": "tracksta:block/wall_station_sign_block/yellow",
+      "y": 90
+    },
+    "facing=east,bg_color=lime": {
+      "model": "tracksta:block/wall_station_sign_block/lime",
+      "y": 90
+    },
+    "facing=east,bg_color=pink": {
+      "model": "tracksta:block/wall_station_sign_block/pink",
+      "y": 90
+    },
+    "facing=east,bg_color=gray": {
+      "model": "tracksta:block/wall_station_sign_block/gray",
+      "y": 90
+    },
+    "facing=east,bg_color=light_gray": {
+      "model": "tracksta:block/wall_station_sign_block/light_gray",
+      "y": 90
+    },
+    "facing=east,bg_color=cyan": {
+      "model": "tracksta:block/wall_station_sign_block/cyan",
+      "y": 90
+    },
+    "facing=east,bg_color=purple": {
+      "model": "tracksta:block/wall_station_sign_block/purple",
+      "y": 90
+    },
+    "facing=east,bg_color=blue": {
+      "model": "tracksta:block/wall_station_sign_block/blue",
+      "y": 90
+    },
+    "facing=east,bg_color=brown": {
+      "model": "tracksta:block/wall_station_sign_block/brown",
+      "y": 90
+    },
+    "facing=east,bg_color=green": {
+      "model": "tracksta:block/wall_station_sign_block/green",
+      "y": 90
+    },
+    "facing=east,bg_color=red": {
+      "model": "tracksta:block/wall_station_sign_block/red",
+      "y": 90
+    },
+    "facing=east,bg_color=black": {
+      "model": "tracksta:block/wall_station_sign_block/black",
+      "y": 90
+    }
+  }
+}

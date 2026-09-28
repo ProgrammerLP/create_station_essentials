@@ -19,6 +19,11 @@
   "block.tracksta.frameless_glass_pane": "Rahmenlose Glasscheibe",
   "block.tracksta.budapest_block_black": "Schwarzer Budapest Block",
   "block.tracksta.budapest_block_yellow": "Gelber Budapest Block",
+  "block.tracksta.station_sign_block": "Bahnhofsschild",
+  "gui.tracksta.station_sign_screen.title": "Bahnhofsschild",
+  "gui.tracksta.station_sign_screen.text": "Stationsname",
+  "gui.tracksta.station_sign_screen.text_color": "Textfarbe",
+  "gui.tracksta.station_sign_screen.bg_color": "Hintergrundfarbe",
 
   "block.tracksta.door_ice": "DB ICE Tür",
   "block.tracksta.door_ice.tooltip.summary": "Verwenden Sie es auf _Zügen_ oder _Aufzügen_, um _realistische Türen_ mit _realistischen Geräuschen_ zu erhalten.",

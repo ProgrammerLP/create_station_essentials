@@ -5,6 +5,7 @@
     "tracksta:nl_platform_block",
     "tracksta:iso_wall_block",
     "tracksta:iso_wall_block_green",
-    "tracksta:ch_platform_block"
+    "tracksta:ch_platform_block",
+    "tracksta:station_sign_block"
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tracksta:block/station_sign_mast_block"
+    }
+  }
+}

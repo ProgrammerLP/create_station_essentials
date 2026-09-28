@@ -20,7 +20,9 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -33,6 +35,9 @@ public class StationSignBlock extends Block implements EntityBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<DyeColor> BG_COLOR = EnumProperty.create("bg_color", DyeColor.class);
+    // Only show the little mounting bracket toward the wall when that wall isn't a full/sturdy
+    // block on that side - flush against a normal solid block, the plate already touches it.
+    public static final BooleanProperty BRACKET = BooleanProperty.create("bracket");
 
     private static final VoxelShape SHAPE_NORTH = Block.box(0, 2, 14, 16, 14, 16);
     private static final VoxelShape SHAPE_SOUTH = Block.box(0, 2, 0, 16, 14, 2);
@@ -44,20 +49,23 @@ public class StationSignBlock extends Block implements EntityBlock {
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(BG_COLOR, DyeColor.BLUE)
+                .setValue(BRACKET, false)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, BG_COLOR);
+        builder.add(FACING, BG_COLOR, BRACKET);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction facing = context.getHorizontalDirection().getOpposite();
-        BlockState state = this.defaultBlockState().setValue(FACING, facing);
+        BlockState state = this.defaultBlockState()
+                .setValue(FACING, facing)
+                .setValue(BRACKET, needsBracket(context.getLevel(), context.getClickedPos(), facing));
 
         for (Direction side : new Direction[]{facing.getClockWise(), facing.getCounterClockWise()}) {
             BlockPos neighborPos = context.getClickedPos().relative(side);
@@ -68,6 +76,35 @@ public class StationSignBlock extends Block implements EntityBlock {
         }
 
         return state;
+    }
+
+    private static boolean needsBracket(BlockGetter level, BlockPos pos, Direction facing) {
+        BlockPos wallPos = pos.relative(facing.getOpposite());
+        BlockState wallState = level.getBlockState(wallPos);
+        return !wallState.isFaceSturdy(level, wallPos, facing);
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (direction == state.getValue(FACING).getOpposite()) {
+            return state.setValue(BRACKET, needsBracket(level, pos, state.getValue(FACING)));
+        }
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        if (level.isClientSide) {
+            return;
+        }
+        Direction facing = state.getValue(FACING);
+        if (neighborPos.equals(pos.relative(facing.getOpposite()))) {
+            boolean needsBracket = needsBracket(level, pos, facing);
+            if (state.getValue(BRACKET) != needsBracket) {
+                level.setBlockAndUpdate(pos, state.setValue(BRACKET, needsBracket));
+            }
+        }
     }
 
     @Override

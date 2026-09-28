@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tracksta:station_sign_block"
+          "name": "tracksta:wall_station_sign_block"
         }
       ],
       "conditions": [

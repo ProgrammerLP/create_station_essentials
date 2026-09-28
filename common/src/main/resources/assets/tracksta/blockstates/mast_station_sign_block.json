@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,pole=false": {
+      "model": "tracksta:block/mast_station_sign_block"
+    },
+    "facing=east,pole=true": {
+      "model": "tracksta:block/mast_station_sign_block/pole"
+    },
+    "facing=south,pole=false": {
+      "model": "tracksta:block/mast_station_sign_block",
+      "y": 90
+    },
+    "facing=south,pole=true": {
+      "model": "tracksta:block/mast_station_sign_block/pole",
+      "y": 90
+    },
+    "facing=west,pole=false": {
+      "model": "tracksta:block/mast_station_sign_block",
+      "y": 180
+    },
+    "facing=west,pole=true": {
+      "model": "tracksta:block/mast_station_sign_block/pole",
+      "y": 180
+    },
+    "facing=north,pole=false": {
+      "model": "tracksta:block/mast_station_sign_block",
+      "y": 270
+    },
+    "facing=north,pole=true": {
+      "model": "tracksta:block/mast_station_sign_block/pole",
+      "y": 270
+    }
+  }
+}

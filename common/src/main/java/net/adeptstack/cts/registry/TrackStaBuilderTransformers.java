@@ -5,6 +5,7 @@ import net.adeptstack.cts.blocks.panelBlocks.IsoWallBlock;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
+import net.adeptstack.cts.blocks.signBlocks.StationSignBlock;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.MapColor;
 
@@ -46,6 +47,21 @@ public class TrackstaBuilderTransformers {
                 .initialProperties(() -> Blocks.IRON_BARS)
                 .properties(p -> p.mapColor(color)
                         .sound(SoundType.METAL))
+                .transform(pickaxeOnly())
+                .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
+                .item()
+                .build()
+                .register();
+    }
+
+    public static BlockEntry<StationSignBlock> StationSignBlock(String id, MapColor color) {
+        return REGISTRATE
+                .block(id, StationSignBlock::new)
+                .initialProperties(() -> Blocks.IRON_BARS)
+                .properties(p -> p.mapColor(color)
+                        .sound(SoundType.METAL)
+                        .noOcclusion()
+                        .strength(1.0F))
                 .transform(pickaxeOnly())
                 .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
                 .item()

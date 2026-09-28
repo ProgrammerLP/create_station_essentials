@@ -4,6 +4,7 @@ import net.adeptstack.cts.blocks.panelBlocks.IsoWallBlock;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
+import net.adeptstack.cts.blocks.signBlocks.StationSignBlock;
 import net.minecraft.world.level.material.MapColor;
 
 public class ModBlocks {
@@ -24,6 +25,10 @@ public class ModBlocks {
 
     public static final BlockEntry<IsoWallBlock> ISO_WALL_BLOCK_GREEN =
             TrackstaBuilderTransformers.IsoWallBlock("iso_wall_block_green", MapColor.COLOR_LIGHT_GREEN);
+
+    //sign blocks
+    public static final BlockEntry<StationSignBlock> STATION_SIGN_BLOCK =
+            TrackstaBuilderTransformers.StationSignBlock("station_sign_block", MapColor.COLOR_BLUE);
 
     //TESTBLOCKS
 

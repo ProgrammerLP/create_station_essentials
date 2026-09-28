@@ -16,6 +16,7 @@ public final class Main {
         // otherwise items land in both and the search tab rejects the duplicate.
         REGISTRATE.defaultCreativeTab(ModTabs.TRACKSTA_TAB.getKey());
         ModBlocks.register();
+        ModBlockEntities.register();
     }
 
     public static ResourceLocation asResource(String path) {

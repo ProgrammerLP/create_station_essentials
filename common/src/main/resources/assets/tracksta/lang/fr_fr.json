@@ -241,14 +241,14 @@
   "advancement.tracksta.platform_block": "L'ère moderne !",
   "advancement.tracksta.platform_block.description": "Recevoir un panneau de quai",
   "advancement.tracksta.doors": "Est-ce cela la RÉALITÉ ?",
-  "advancement.tracksta.doors.description": "Recevez l'une des nouvelles portes Create: tracksta",
+  "advancement.tracksta.doors.description": "Recevez l'une des nouvelles portes Create Station Essentials",
   "advancement.tracksta.incomplete_prototype_doors": "Une première ébauche !",
   "advancement.tracksta.incomplete_prototype_doors.description": "Ça grince et ça se bloque.",
   "advancement.tracksta.door_ingrediants": "Entrepôt de composants",
   "advancement.tracksta.door_ingrediants.description": "Posséder au moins un composant de porte de base",
 
-  "itemGroup.tracksta.trainutils_tab": "Create: tracksta",
-  "itemGroup.tracksta.doors_tab": "Create: tracksta - Doors",
+  "itemGroup.tracksta.trainutils_tab": "Create Station Essentials",
+  "itemGroup.tracksta.doors_tab": "Create Station Essentials - Doors",
 
   "gui.tracksta.selection_screen.blockplacementscreen_de": "Panneau de quai allemand",
   "gui.tracksta.selection_screen.blockplacementscreen_nl": "Panneau de quai néerlandais",

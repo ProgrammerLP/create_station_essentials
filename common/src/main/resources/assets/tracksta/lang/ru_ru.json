@@ -201,8 +201,8 @@
   "advancement.tracksta.doors": "Это реальность?",
   "advancement.tracksta.doors.description": "Получить tracksta дверь",
 
-  "itemGroup.tracksta.trainutils_tab": "tracksta",
-  "itemGroup.tracksta.doors_tab": "tracksta - двери",
+  "itemGroup.tracksta.trainutils_tab": "Create Station Essentials",
+  "itemGroup.tracksta.doors_tab": "Create Station Essentials - двери",
 
   "gui.tracksta.selection_screen.blockplacementscreen_de": "Блоки немецких платформ",
   "gui.tracksta.selection_screen.blockplacementscreen_nl": "Блоки голландских платформ",

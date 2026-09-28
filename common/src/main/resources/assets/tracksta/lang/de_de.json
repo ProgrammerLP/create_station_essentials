@@ -251,14 +251,14 @@
   "advancement.tracksta.platform_block": "Modernes Zeitalter!",
   "advancement.tracksta.platform_block.description": "Bekomme einen Plattformblock",
   "advancement.tracksta.doors": "Ist das die REALITÄT?",
-  "advancement.tracksta.doors.description": "Bekomme eine der neuen Create: tracksta Türen",
+  "advancement.tracksta.doors.description": "Bekomme eine der neuen Create Station Essentials Türen",
   "advancement.tracksta.incomplete_prototype_doors": "Ein erster Entwurf!",
   "advancement.tracksta.incomplete_prototype_doors.description": "Sie quietscht und klemmt.",
   "advancement.tracksta.door_ingrediants": "Komponentenlager",
   "advancement.tracksta.door_ingrediants.description": "Besitze mindestens eine Basis Komponente für Türen",
 
-  "itemGroup.tracksta.trainutils_tab": "Create: tracksta",
-  "itemGroup.tracksta.doors_tab": "Create: tracksta - Türen",
+  "itemGroup.tracksta.trainutils_tab": "Create Station Essentials",
+  "itemGroup.tracksta.doors_tab": "Create Station Essentials - Türen",
 
   "gui.tracksta.selection_screen.blockplacementscreen_de": "Deutsche Gleisblöcke",
   "gui.tracksta.selection_screen.blockplacementscreen_nl": "Niederländische Gleisblöcke",

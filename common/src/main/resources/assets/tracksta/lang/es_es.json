@@ -241,14 +241,14 @@
   "advancement.tracksta.platform_block": "¡Era moderna!",
   "advancement.tracksta.platform_block.description": "Recibe un bloque de andén",
   "advancement.tracksta.doors": "¿Esto es REALIDAD?",
-  "advancement.tracksta.doors.description": "Recibe una de las nuevas puertas de Create: tracksta",
+  "advancement.tracksta.doors.description": "Recibe una de las nuevas puertas de Create Station Essentials",
   "advancement.tracksta.incomplete_prototype_doors": "¡Un primer borrador!",
   "advancement.tracksta.incomplete_prototype_doors.description": "Chirría y se atasca.",
   "advancement.tracksta.door_ingrediants": "Almacén de componentes",
   "advancement.tracksta.door_ingrediants.description": "Posee al menos un componente básico de puerta",
 
-  "itemGroup.tracksta.trainutils_tab": "Create: tracksta",
-  "itemGroup.tracksta.doors_tab": "Create: tracksta - Doors",
+  "itemGroup.tracksta.trainutils_tab": "Create Station Essentials",
+  "itemGroup.tracksta.doors_tab": "Create Station Essentials - Doors",
 
   "gui.tracksta.selection_screen.blockplacementscreen_de": "Bloques de andén alemán",
   "gui.tracksta.selection_screen.blockplacementscreen_nl": "Bloques de andén holandés",

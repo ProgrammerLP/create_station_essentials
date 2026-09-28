@@ -251,14 +251,14 @@
   "advancement.tracksta.platform_block": "Modern Age!",
   "advancement.tracksta.platform_block.description": "Receive a Platform Block",
   "advancement.tracksta.doors": "Is this the REALITY?",
-  "advancement.tracksta.doors.description": "Receive one of the new Create: tracksta doors",
+  "advancement.tracksta.doors.description": "Receive one of the new Create Station Essentials doors",
   "advancement.tracksta.incomplete_prototype_doors": "A first Draft!",
   "advancement.tracksta.incomplete_prototype_doors.description": "It squeaks and jams.",
   "advancement.tracksta.door_ingrediants": "Component Warehouse",
   "advancement.tracksta.door_ingrediants.description": "Own at least one basic door component",
 
-  "itemGroup.tracksta.trainutils_tab": "Create: tracksta",
-  "itemGroup.tracksta.doors_tab": "Create: tracksta - Doors",
+  "itemGroup.tracksta.trainutils_tab": "Create Station Essentials",
+  "itemGroup.tracksta.doors_tab": "Create Station Essentials - Doors",
 
   "gui.tracksta.selection_screen.blockplacementscreen_de": "German Platform Blocks",
   "gui.tracksta.selection_screen.blockplacementscreen_nl": "Dutch Platform Blocks",

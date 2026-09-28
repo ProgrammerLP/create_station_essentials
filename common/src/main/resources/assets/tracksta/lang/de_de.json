@@ -12,5 +12,14 @@
   "itemGroup.tracksta.tracksta_tab": "Create TrackSta",
   "gui.tracksta.selection_screen.blockplacementscreen_de": "Deutsche Gleisblöcke",
   "gui.tracksta.selection_screen.blockplacementscreen_nl": "Niederländische Gleisblöcke",
-  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Schweizer Gleisblöcke"
+  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Schweizer Gleisblöcke",
+
+  "block.tracksta.wall_station_sign_block": "Wand-Bahnhofsschild",
+  "block.tracksta.mast_station_sign_block": "Mast-Bahnhofsschild",
+  "block.tracksta.station_sign_mast_block": "Schildmast",
+  "block.tracksta.station_sign_double_block": "Doppelseitiges Bahnhofsschild",
+  "gui.tracksta.station_sign_screen.title": "Bahnhofsschild",
+  "gui.tracksta.station_sign_screen.text": "Stationsname",
+  "gui.tracksta.station_sign_screen.text_color": "Textfarbe",
+  "gui.tracksta.station_sign_screen.bg_color": "Hintergrundfarbe"
 }

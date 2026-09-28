@@ -13,5 +13,14 @@
 
   "gui.tracksta.selection_screen.blockplacementscreen_de": "German Platform Blocks",
   "gui.tracksta.selection_screen.blockplacementscreen_nl": "Dutch Platform Blocks",
-  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Swiss Platform Blocks"
+  "gui.tracksta.selection_screen.blockplacementscreen_ch": "Swiss Platform Blocks",
+
+  "block.tracksta.wall_station_sign_block": "Wall Station Name Sign",
+  "block.tracksta.mast_station_sign_block": "Mast Station Name Sign",
+  "block.tracksta.station_sign_mast_block": "Sign Mast",
+  "block.tracksta.station_sign_double_block": "Double-Sided Station Sign",
+  "gui.tracksta.station_sign_screen.title": "Station Sign",
+  "gui.tracksta.station_sign_screen.text": "Station name",
+  "gui.tracksta.station_sign_screen.text_color": "Text color",
+  "gui.tracksta.station_sign_screen.bg_color": "Background color"
 }

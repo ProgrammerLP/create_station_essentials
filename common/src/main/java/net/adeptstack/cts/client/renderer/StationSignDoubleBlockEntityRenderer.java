@@ -18,6 +18,9 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
 public class StationSignDoubleBlockEntityRenderer implements BlockEntityRenderer<StationSignDoubleBlockEntity> {
 
     private static final int MAX_RUN_SCAN = 64;
@@ -27,7 +30,17 @@ public class StationSignDoubleBlockEntityRenderer implements BlockEntityRenderer
     private static final float FACE_OFFSET = 0.4f;
     private static final float NATURAL_SCALE = 0.05f;
 
+    // Text-forward world direction per facing, precomputed once - only 4 facings are possible, so
+    // there's no reason to redo the quaternion rotation (and its allocations) on every render call.
+    private static final Direction[] TEXT_FORWARD_BY_FACING = buildTextForwardTable();
+
     private final Font font;
+
+    // Per-block-entity run cache (one slot per side), valid for a single game tick. render() and
+    // getRenderBoundingBox() are both called independently, once or more per frame, for the leader
+    // block of a run - without this they'd redundantly re-scan the whole (up to 64-block) chain,
+    // for both sides, on every one of those calls.
+    private final Map<StationSignDoubleBlockEntity, CachedRun> runCache = new WeakHashMap<>();
 
     public StationSignDoubleBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.font = context.getFont();
@@ -49,27 +62,21 @@ public class StationSignDoubleBlockEntityRenderer implements BlockEntityRenderer
         Direction sideADir = axisX ? Direction.EAST : Direction.SOUTH;
         Direction sideBDir = axisX ? Direction.WEST : Direction.NORTH;
 
-        drawSide(level, be, axis, be.getBlockPos(), poseStack, bufferSource, packedLight, sideADir, be.getTextA(), be.getTextColorA());
-        drawSide(level, be, axis, be.getBlockPos(), poseStack, bufferSource, packedLight, sideBDir, be.getTextB(), be.getTextColorB());
+        drawSide(level, be, axis, be.getBlockPos(), poseStack, bufferSource, packedLight, sideADir, be.getTextA(), be.getTextColorA(), 0);
+        drawSide(level, be, axis, be.getBlockPos(), poseStack, bufferSource, packedLight, sideBDir, be.getTextB(), be.getTextColorB(), 1);
     }
 
     private void drawSide(Level level, StationSignDoubleBlockEntity be, Direction.Axis axis, BlockPos pos, PoseStack poseStack,
-                           MultiBufferSource bufferSource, int packedLight, Direction facing, String text, DyeColor textColor) {
+                           MultiBufferSource bufferSource, int packedLight, Direction facing, String text, DyeColor textColor, int sideIndex) {
         if (text == null || text.isBlank()) {
             return;
         }
 
-        // Which world direction this side's text actually advances in once rotated - the same
-        // handedness quirk as the single sign, worked out at runtime instead of guessed by hand.
-        Vector3f localXInWorld = new Quaternionf().rotateY((float) Math.toRadians(yRotFor(facing))).transform(new Vector3f(1, 0, 0));
-        Direction textForwardDir = Direction.getNearest(localXInWorld.x(), localXInWorld.y(), localXInWorld.z());
-
-        int leftCount = countRun(level, pos, textForwardDir.getOpposite(), axis);
-        if (leftCount != 0) {
+        RunInfo run = computeSideRun(level, be, pos, axis, facing, sideIndex);
+        if (run.leftCount() != 0) {
             return; // not the leader for this side's run
         }
-        int rightCount = countRun(level, pos, textForwardDir, axis);
-        int totalLength = leftCount + rightCount + 1;
+        int totalLength = run.totalLength();
 
         int textPixelWidth = font.width(text);
         if (textPixelWidth <= 0) {
@@ -119,19 +126,48 @@ public class StationSignDoubleBlockEntityRenderer implements BlockEntityRenderer
         Direction sideBDir = axisX ? Direction.WEST : Direction.NORTH;
 
         AABB box = new AABB(pos);
-        for (Direction facing : new Direction[]{sideADir, sideBDir}) {
-            Vector3f localXInWorld = new Quaternionf().rotateY((float) Math.toRadians(yRotFor(facing))).transform(new Vector3f(1, 0, 0));
-            Direction textForwardDir = Direction.getNearest(localXInWorld.x(), localXInWorld.y(), localXInWorld.z());
+        Direction[] sides = {sideADir, sideBDir};
+        for (int sideIndex = 0; sideIndex < sides.length; sideIndex++) {
+            Direction facing = sides[sideIndex];
+            Direction textForwardDir = TEXT_FORWARD_BY_FACING[facing.ordinal()];
+
+            // Non-leader blocks never draw anything beyond their own block, so there's no need to
+            // scan the whole run for this side just to build the culling box - a single scan in the
+            // "backward" direction is enough to tell leaders and non-leaders apart.
             int leftCount = countRun(level, pos, textForwardDir.getOpposite(), axis);
-            int rightCount = countRun(level, pos, textForwardDir, axis);
-            BlockPos start = pos.relative(textForwardDir.getOpposite(), leftCount);
-            BlockPos end = pos.relative(textForwardDir, rightCount);
+            if (leftCount != 0) {
+                continue;
+            }
+
+            RunInfo run = computeSideRun(level, be, pos, axis, facing, sideIndex);
+            BlockPos start = pos.relative(textForwardDir.getOpposite(), run.leftCount());
+            BlockPos end = pos.relative(textForwardDir, run.rightCount());
             box = box.minmax(new AABB(start.getX(), start.getY(), start.getZ(), end.getX() + 1, end.getY() + 1, end.getZ() + 1));
         }
         return box;
     }
 
-    private int countRun(Level level, BlockPos origin, Direction step, Direction.Axis requiredAxis) {
+    private RunInfo computeSideRun(Level level, StationSignDoubleBlockEntity be, BlockPos pos, Direction.Axis axis, Direction facing, int sideIndex) {
+        long tick = level.getGameTime();
+        CachedRun cached = runCache.get(be);
+        if (cached == null || cached.tick != tick) {
+            cached = new CachedRun(tick);
+            runCache.put(be, cached);
+        }
+        RunInfo run = cached.runs[sideIndex];
+        if (run != null) {
+            return run;
+        }
+
+        Direction textForwardDir = TEXT_FORWARD_BY_FACING[facing.ordinal()];
+        int leftCount = countRun(level, pos, textForwardDir.getOpposite(), axis);
+        int rightCount = countRun(level, pos, textForwardDir, axis);
+        run = new RunInfo(leftCount, rightCount);
+        cached.runs[sideIndex] = run;
+        return run;
+    }
+
+    private static int countRun(Level level, BlockPos origin, Direction step, Direction.Axis requiredAxis) {
         int count = 0;
         BlockPos cursor = origin.relative(step);
         for (int i = 0; i < MAX_RUN_SCAN; i++) {
@@ -143,6 +179,31 @@ public class StationSignDoubleBlockEntityRenderer implements BlockEntityRenderer
             cursor = cursor.relative(step);
         }
         return count;
+    }
+
+    private record RunInfo(int leftCount, int rightCount) {
+        int totalLength() {
+            return leftCount + rightCount + 1;
+        }
+    }
+
+    private static final class CachedRun {
+        final long tick;
+        final RunInfo[] runs = new RunInfo[2];
+
+        CachedRun(long tick) {
+            this.tick = tick;
+        }
+    }
+
+    private static Direction[] buildTextForwardTable() {
+        // Which world direction the rotated text advances in - same handedness quirk as the other signs.
+        Direction[] table = new Direction[Direction.values().length];
+        for (Direction facing : Direction.values()) {
+            Vector3f localXInWorld = new Quaternionf().rotateY((float) Math.toRadians(yRotFor(facing))).transform(new Vector3f(1, 0, 0));
+            table[facing.ordinal()] = Direction.getNearest(localXInWorld.x(), localXInWorld.y(), localXInWorld.z());
+        }
+        return table;
     }
 
     private static float yRotFor(Direction facing) {

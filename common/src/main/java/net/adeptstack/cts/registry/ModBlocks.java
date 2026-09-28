@@ -5,6 +5,8 @@ import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
 import net.adeptstack.cts.blocks.signBlocks.StationSignBlock;
+import net.adeptstack.cts.blocks.signBlocks.StationSignDoubleBlock;
+import net.adeptstack.cts.blocks.signBlocks.StationSignMastBlock;
 import net.minecraft.world.level.material.MapColor;
 
 public class ModBlocks {
@@ -29,6 +31,12 @@ public class ModBlocks {
     //sign blocks
     public static final BlockEntry<StationSignBlock> STATION_SIGN_BLOCK =
             TrackstaBuilderTransformers.StationSignBlock("station_sign_block", MapColor.COLOR_BLUE);
+
+    public static final BlockEntry<StationSignMastBlock> STATION_SIGN_MAST_BLOCK =
+            TrackstaBuilderTransformers.StationSignMastBlock("station_sign_mast_block", MapColor.METAL);
+
+    public static final BlockEntry<StationSignDoubleBlock> STATION_SIGN_DOUBLE_BLOCK =
+            TrackstaBuilderTransformers.StationSignDoubleBlock("station_sign_double_block", MapColor.METAL);
 
     //TESTBLOCKS
 

@@ -65,21 +65,13 @@ public class StationSignDoubleBlock extends Block implements EntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
                 .setValue(AXIS, context.getHorizontalDirection().getAxis())
-                .setValue(POLE, needsPole(context.getLevel(), context.getClickedPos()));
-    }
-
-    private static boolean needsPole(BlockGetter level, BlockPos pos) {
-        return isMastLike(level.getBlockState(pos.above())) || isMastLike(level.getBlockState(pos.below()));
-    }
-
-    private static boolean isMastLike(BlockState state) {
-        return state.getBlock() instanceof StationSignMastBlock || state.getBlock() instanceof StationSignDoubleBlock;
+                .setValue(POLE, StationSignMastBlock.needsPole(context.getLevel(), context.getClickedPos()));
     }
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (direction == Direction.UP || direction == Direction.DOWN) {
-            return state.setValue(POLE, needsPole(level, pos));
+            return state.setValue(POLE, StationSignMastBlock.needsPole(level, pos));
         }
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
@@ -91,7 +83,7 @@ public class StationSignDoubleBlock extends Block implements EntityBlock {
             return;
         }
         if (neighborPos.equals(pos.above()) || neighborPos.equals(pos.below())) {
-            boolean needsPole = needsPole(level, pos);
+            boolean needsPole = StationSignMastBlock.needsPole(level, pos);
             if (state.getValue(POLE) != needsPole) {
                 level.setBlockAndUpdate(pos, state.setValue(POLE, needsPole));
             }

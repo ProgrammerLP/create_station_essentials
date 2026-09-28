@@ -2,15 +2,18 @@ package net.adeptstack.cts.client;
 
 import de.mrjulsen.mcdragonlib.network.NetworkDirection;
 import net.adeptstack.cts.blockentities.StationSignBlockEntity;
+import net.adeptstack.cts.blockentities.StationSignDoubleBlockEntity;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
 import net.adeptstack.cts.network.ModNetwork;
 import net.adeptstack.cts.network.packets.PlatformBlockPacket;
+import net.adeptstack.cts.network.packets.StationSignDoublePacket;
 import net.adeptstack.cts.network.packets.StationSignPacket;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockCHPlacementScreen;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockDEPlacementScreen;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockNLPlacementScreen;
+import net.adeptstack.cts.ui.screens.signBlocks.StationSignDoubleScreen;
 import net.adeptstack.cts.ui.screens.signBlocks.StationSignScreen;
 import net.adeptstack.cts.utils.screenUtils.TextureNames;
 import net.minecraft.client.Minecraft;
@@ -83,6 +86,18 @@ public class ClientWrapper {
                         blockEntity.getTextColor(),
                         blockState.getValue(net.adeptstack.cts.blocks.signBlocks.StationSignBlock.BG_COLOR),
                         (text, textColor, bgColor) -> ModNetwork.STATION_SIGN_PACKET.send(NetworkDirection.toServer(), new StationSignPacket(pos, text, textColor, bgColor))
+                )
+        );
+    }
+
+    //Station Sign Double Screen
+    public static void openStationSignDoubleScreen(BlockPos pos, BlockState blockState, StationSignDoubleBlockEntity blockEntity) {
+        Minecraft.getInstance().setScreen(
+                new StationSignDoubleScreen(
+                        blockEntity.getTextA(), blockEntity.getTextColorA(), blockEntity.getBgColorA(),
+                        (text, textColor, bgColor) ->
+                                ModNetwork.STATION_SIGN_DOUBLE_PACKET.send(NetworkDirection.toServer(),
+                                        new StationSignDoublePacket(pos, text, textColor, bgColor, text, textColor, bgColor))
                 )
         );
     }

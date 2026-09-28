@@ -5,6 +5,7 @@ import de.mrjulsen.mcdragonlib.network.NetworkDirection;
 import de.mrjulsen.mcdragonlib.network.NetworkPacketType;
 import de.mrjulsen.mcdragonlib.util.DLUtils;
 import net.adeptstack.cts.network.packets.PlatformBlockPacket;
+import net.adeptstack.cts.network.packets.StationSignDoublePacket;
 import net.adeptstack.cts.network.packets.StationSignPacket;
 
 import static net.adeptstack.cts.Main.MOD_ID;
@@ -27,6 +28,14 @@ public class ModNetwork {
                     NetworkDirection.C2S,
                     StationSignPacket::handle,
                     StationSignPacket::new
+            );
+
+    public static final NetworkPacketType.Send<NetworkDirection.C2S, StationSignDoublePacket> STATION_SIGN_DOUBLE_PACKET =
+            CTU_NETWORK_MANAGER.registerSendOnlyPacket(
+                    "send_station_sign_double_packet",
+                    NetworkDirection.C2S,
+                    StationSignDoublePacket::handle,
+                    StationSignDoublePacket::new
             );
 
     public static void networkInit() { }

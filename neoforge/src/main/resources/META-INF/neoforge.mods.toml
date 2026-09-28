@@ -6,7 +6,7 @@ license = "GNU General Public License v3.0"
 [[mods]]
 modId = "tracksta"
 version = "${version}"
-displayName = "Create TrackSta"
+displayName = "Create Station Essentials"
 authors = "ProgrammerLP"
 description = '''
 Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks and Noise Isolation Walls.

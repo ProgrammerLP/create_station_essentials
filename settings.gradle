@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'tracksta'
+rootProject.name = 'cse'
 
 include 'common'
 // include 'fabric'

@@ -5,6 +5,10 @@ import net.adeptstack.cts.blocks.panelBlocks.IsoWallBlock;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
+import net.adeptstack.cts.blocks.signBlocks.MastStationSignBlock;
+import net.adeptstack.cts.blocks.signBlocks.StationSignDoubleBlock;
+import net.adeptstack.cts.blocks.signBlocks.StationSignMastBlock;
+import net.adeptstack.cts.blocks.signBlocks.WallStationSignBlock;
 import net.minecraft.world.level.material.MapColor;
 
 public class ModBlocks {
@@ -25,6 +29,19 @@ public class ModBlocks {
 
     public static final BlockEntry<IsoWallBlock> ISO_WALL_BLOCK_GREEN =
             TrackStaBuilderTransformers.IsoWallBlock("iso_wall_block_green", MapColor.COLOR_LIGHT_GREEN);
+
+    //sign blocks
+    public static final BlockEntry<WallStationSignBlock> WALL_STATION_SIGN_BLOCK =
+            TrackStaBuilderTransformers.WallStationSignBlock("wall_station_sign_block", MapColor.COLOR_BLUE);
+
+    public static final BlockEntry<StationSignMastBlock> STATION_SIGN_MAST_BLOCK =
+            TrackStaBuilderTransformers.StationSignMastBlock("station_sign_mast_block", MapColor.METAL);
+
+    public static final BlockEntry<MastStationSignBlock> MAST_STATION_SIGN_BLOCK =
+            TrackStaBuilderTransformers.MastStationSignBlock("mast_station_sign_block", MapColor.METAL);
+
+    public static final BlockEntry<StationSignDoubleBlock> STATION_SIGN_DOUBLE_BLOCK =
+            TrackStaBuilderTransformers.StationSignDoubleBlock("station_sign_double_block", MapColor.METAL);
 
     //TESTBLOCKS
 

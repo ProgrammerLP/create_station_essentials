@@ -20,6 +20,7 @@ public final class Main {
     public static void init() {
         ModTabs.CREATIVE_MODE_TABS.register();
         ModBlocks.register();
+        ModBlockEntities.register();
         ModNetwork.init();
         ModTags.register();
     }

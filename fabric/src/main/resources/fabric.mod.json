@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "tracksta",
   "version": "${version}",
-  "name": "Create TrackSta",
+  "name": "Create Station Essentials",
   "description": "Mod that adds building blocks for tracks and stations. e.g. Platform Sign Blocks and Noise Isolation Walls.",
   "authors": [
     "ProgrammerLP"

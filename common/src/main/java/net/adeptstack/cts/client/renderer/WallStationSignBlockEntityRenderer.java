@@ -17,6 +17,9 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
 public class WallStationSignBlockEntityRenderer implements BlockEntityRenderer<WallStationSignBlockEntity> {
 
     private static final int MAX_RUN_SCAN = 64;
@@ -26,6 +29,16 @@ public class WallStationSignBlockEntityRenderer implements BlockEntityRenderer<W
     // Text only ever shrinks below this to fit a longer string into fewer blocks - it never
     // grows past it just because a run has spare width, so short text doesn't balloon in height.
     private static final float NATURAL_SCALE = 0.05f;
+
+    // Text-forward world direction per facing, precomputed once - only 4 facings are possible, so
+    // there's no reason to redo the quaternion rotation (and its allocations) on every render call.
+    private static final Direction[] TEXT_FORWARD_BY_FACING = buildTextForwardTable();
+
+    // Per-block-entity run cache, valid for a single game tick. render() and getRenderBoundingBox()
+    // (on the block entity, delegating to computeRenderBoundingBox() below) are both called
+    // independently, once or more per frame, for the leader block of a run - without this they'd
+    // redundantly re-scan the whole (up to 64-block) chain on every one of those calls.
+    private static final Map<WallStationSignBlockEntity, CachedRun> RUN_CACHE = new WeakHashMap<>();
 
     private final Font font;
 
@@ -50,7 +63,7 @@ public class WallStationSignBlockEntityRenderer implements BlockEntityRenderer<W
         }
 
         Direction facing = state.getValue(WallStationSignBlock.FACING);
-        RunInfo run = computeRun(level, be.getBlockPos(), facing);
+        RunInfo run = computeRun(level, be, be.getBlockPos(), facing);
 
         // Only the leftmost (in text-forward terms) block of a connected run draws - it draws the
         // *whole* string in one go, extending across the neighboring blocks in world space. Drawing
@@ -111,22 +124,36 @@ public class WallStationSignBlockEntityRenderer implements BlockEntityRenderer<W
             return new AABB(pos);
         }
 
-        RunInfo run = computeRun(level, pos, state.getValue(WallStationSignBlock.FACING));
+        Direction facing = state.getValue(WallStationSignBlock.FACING);
+        Direction textForwardDir = TEXT_FORWARD_BY_FACING[facing.ordinal()];
+
+        // Non-leader blocks never draw anything beyond their own block (see render() above), so
+        // there's no need to scan the whole run just to build their culling box - a single scan in
+        // the "backward" direction is enough to tell leaders and non-leaders apart.
+        int leftCount = countRun(level, pos, textForwardDir.getOpposite(), facing);
+        if (leftCount != 0) {
+            return new AABB(pos);
+        }
+
+        RunInfo run = computeRun(level, be, pos, facing);
         BlockPos start = pos.relative(run.textForwardDir().getOpposite(), run.leftCount());
         BlockPos end = pos.relative(run.textForwardDir(), run.rightCount());
         return new AABB(start.getX(), start.getY(), start.getZ(), end.getX() + 1, end.getY() + 1, end.getZ() + 1);
     }
 
-    private static RunInfo computeRun(Level level, BlockPos pos, Direction facing) {
-        // Determine which world direction the text's rotated local +X axis actually points to by
-        // transforming it through the exact same rotation used to orient the text plane - hand
-        // -derived lookup tables for this kept coming out wrong in one way or another.
-        Vector3f localXInWorld = new Quaternionf().rotateY((float) Math.toRadians(yRotFor(facing))).transform(new Vector3f(1, 0, 0));
-        Direction textForwardDir = Direction.getNearest(localXInWorld.x(), localXInWorld.y(), localXInWorld.z());
+    private static RunInfo computeRun(Level level, WallStationSignBlockEntity be, BlockPos pos, Direction facing) {
+        long tick = level.getGameTime();
+        CachedRun cached = RUN_CACHE.get(be);
+        if (cached != null && cached.tick() == tick) {
+            return cached.run();
+        }
 
+        Direction textForwardDir = TEXT_FORWARD_BY_FACING[facing.ordinal()];
         int leftCount = countRun(level, pos, textForwardDir.getOpposite(), facing);
         int rightCount = countRun(level, pos, textForwardDir, facing);
-        return new RunInfo(textForwardDir, leftCount, rightCount);
+        RunInfo run = new RunInfo(textForwardDir, leftCount, rightCount);
+        RUN_CACHE.put(be, new CachedRun(tick, run));
+        return run;
     }
 
     private static int countRun(Level level, BlockPos origin, Direction step, Direction requiredFacing) {
@@ -147,6 +174,21 @@ public class WallStationSignBlockEntityRenderer implements BlockEntityRenderer<W
         int totalLength() {
             return leftCount + rightCount + 1;
         }
+    }
+
+    private record CachedRun(long tick, RunInfo run) {
+    }
+
+    private static Direction[] buildTextForwardTable() {
+        // Determine which world direction the text's rotated local +X axis actually points to by
+        // transforming it through the exact same rotation used to orient the text plane - hand
+        // -derived lookup tables for this kept coming out wrong in one way or another.
+        Direction[] table = new Direction[Direction.values().length];
+        for (Direction facing : Direction.values()) {
+            Vector3f localXInWorld = new Quaternionf().rotateY((float) Math.toRadians(yRotFor(facing))).transform(new Vector3f(1, 0, 0));
+            table[facing.ordinal()] = Direction.getNearest(localXInWorld.x(), localXInWorld.y(), localXInWorld.z());
+        }
+        return table;
     }
 
     private static float yRotFor(Direction facing) {

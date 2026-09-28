@@ -17,6 +17,9 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
 public class MastStationSignBlockEntityRenderer implements BlockEntityRenderer<MastStationSignBlockEntity> {
 
     private static final int MAX_RUN_SCAN = 64;
@@ -25,6 +28,16 @@ public class MastStationSignBlockEntityRenderer implements BlockEntityRenderer<M
     // outer face at 0.875 from center to not render behind the plate as seen from outside.
     private static final float FACE_OFFSET = 0.4f;
     private static final float NATURAL_SCALE = 0.05f;
+
+    // Text-forward world direction per facing, precomputed once - only 4 facings are possible, so
+    // there's no reason to redo the quaternion rotation (and its allocations) on every render call.
+    private static final Direction[] TEXT_FORWARD_BY_FACING = buildTextForwardTable();
+
+    // Per-block-entity run cache, valid for a single game tick. render() and getRenderBoundingBox()
+    // (on the block entity, delegating to computeRenderBoundingBox() below) are both called
+    // independently, once or more per frame, for the leader block of a run - without this they'd
+    // redundantly re-scan the whole (up to 64-block) chain on every one of those calls.
+    private static final Map<MastStationSignBlockEntity, CachedRun> RUN_CACHE = new WeakHashMap<>();
 
     private final Font font;
 
@@ -49,13 +62,13 @@ public class MastStationSignBlockEntityRenderer implements BlockEntityRenderer<M
         }
 
         Direction facing = state.getValue(MastStationSignBlock.FACING);
-        Direction textForwardDir = textForwardDirection(facing);
+        RunInfo run = computeRun(level, be, be.getBlockPos(), facing);
 
         // Only the leading block of a connected run draws, in one call across the whole run.
-        if (countRun(level, be.getBlockPos(), textForwardDir.getOpposite(), facing) != 0) {
+        if (run.leftCount() != 0) {
             return;
         }
-        int totalLength = countRun(level, be.getBlockPos(), textForwardDir, facing) + 1;
+        int totalLength = run.totalLength();
 
         int textPixelWidth = font.width(text);
         if (textPixelWidth <= 0) {
@@ -91,16 +104,35 @@ public class MastStationSignBlockEntityRenderer implements BlockEntityRenderer<M
             return new AABB(pos);
         }
         Direction facing = be.getBlockState().getValue(MastStationSignBlock.FACING);
-        Direction forward = textForwardDirection(facing);
-        BlockPos start = pos.relative(forward.getOpposite(), countRun(level, pos, forward.getOpposite(), facing));
-        BlockPos end = pos.relative(forward, countRun(level, pos, forward, facing));
+        Direction forward = TEXT_FORWARD_BY_FACING[facing.ordinal()];
+
+        // Non-leader blocks never draw anything beyond their own block (see render() above), so
+        // there's no need to scan the whole run just to build their culling box - a single scan in
+        // the "backward" direction is enough to tell leaders and non-leaders apart.
+        int leftCount = countRun(level, pos, forward.getOpposite(), facing);
+        if (leftCount != 0) {
+            return new AABB(pos);
+        }
+
+        RunInfo run = computeRun(level, be, pos, facing);
+        BlockPos start = pos.relative(forward.getOpposite(), run.leftCount());
+        BlockPos end = pos.relative(forward, run.rightCount());
         return new AABB(start.getX(), start.getY(), start.getZ(), end.getX() + 1, end.getY() + 1, end.getZ() + 1);
     }
 
-    // Which world direction the rotated text advances in - same handedness quirk as the other signs.
-    private static Direction textForwardDirection(Direction facing) {
-        Vector3f localXInWorld = new Quaternionf().rotateY((float) Math.toRadians(yRotFor(facing))).transform(new Vector3f(1, 0, 0));
-        return Direction.getNearest(localXInWorld.x(), localXInWorld.y(), localXInWorld.z());
+    private static RunInfo computeRun(Level level, MastStationSignBlockEntity be, BlockPos pos, Direction facing) {
+        long tick = level.getGameTime();
+        CachedRun cached = RUN_CACHE.get(be);
+        if (cached != null && cached.tick() == tick) {
+            return cached.run();
+        }
+
+        Direction textForwardDir = TEXT_FORWARD_BY_FACING[facing.ordinal()];
+        int leftCount = countRun(level, pos, textForwardDir.getOpposite(), facing);
+        int rightCount = countRun(level, pos, textForwardDir, facing);
+        RunInfo run = new RunInfo(leftCount, rightCount);
+        RUN_CACHE.put(be, new CachedRun(tick, run));
+        return run;
     }
 
     private static int countRun(Level level, BlockPos origin, Direction step, Direction requiredFacing) {
@@ -115,6 +147,25 @@ public class MastStationSignBlockEntityRenderer implements BlockEntityRenderer<M
             cursor = cursor.relative(step);
         }
         return count;
+    }
+
+    private record RunInfo(int leftCount, int rightCount) {
+        int totalLength() {
+            return leftCount + rightCount + 1;
+        }
+    }
+
+    private record CachedRun(long tick, RunInfo run) {
+    }
+
+    private static Direction[] buildTextForwardTable() {
+        // Which world direction the rotated text advances in - same handedness quirk as the other signs.
+        Direction[] table = new Direction[Direction.values().length];
+        for (Direction facing : Direction.values()) {
+            Vector3f localXInWorld = new Quaternionf().rotateY((float) Math.toRadians(yRotFor(facing))).transform(new Vector3f(1, 0, 0));
+            table[facing.ordinal()] = Direction.getNearest(localXInWorld.x(), localXInWorld.y(), localXInWorld.z());
+        }
+        return table;
     }
 
     private static float yRotFor(Direction facing) {

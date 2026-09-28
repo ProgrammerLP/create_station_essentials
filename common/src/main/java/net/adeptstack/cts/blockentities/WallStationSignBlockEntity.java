@@ -13,19 +13,19 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class StationSignBlockEntity extends BlockEntity {
+public class WallStationSignBlockEntity extends BlockEntity {
 
     public static final String DEFAULT_TEXT = "Bahnhof";
 
     private String text = DEFAULT_TEXT;
     private DyeColor textColor = DyeColor.WHITE;
 
-    public StationSignBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public WallStationSignBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public StationSignBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntities.STATION_SIGN_BLOCK_ENTITY.get(), pos, state);
+    public WallStationSignBlockEntity(BlockPos pos, BlockState state) {
+        this(ModBlockEntities.WALL_STATION_SIGN_BLOCK_ENTITY.get(), pos, state);
     }
 
     public String getText() {

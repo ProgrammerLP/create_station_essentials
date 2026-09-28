@@ -2,8 +2,8 @@ package net.adeptstack.cts.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.adeptstack.cts.blockentities.StationSignBlockEntity;
-import net.adeptstack.cts.blocks.signBlocks.StationSignBlock;
+import net.adeptstack.cts.blockentities.WallStationSignBlockEntity;
+import net.adeptstack.cts.blocks.signBlocks.WallStationSignBlock;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -17,7 +17,7 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class StationSignBlockEntityRenderer implements BlockEntityRenderer<StationSignBlockEntity> {
+public class WallStationSignBlockEntityRenderer implements BlockEntityRenderer<WallStationSignBlockEntity> {
 
     private static final int MAX_RUN_SCAN = 64;
     private static final float RUN_PADDING_BLOCKS = 0.12f;
@@ -29,18 +29,18 @@ public class StationSignBlockEntityRenderer implements BlockEntityRenderer<Stati
 
     private final Font font;
 
-    public StationSignBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+    public WallStationSignBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.font = context.getFont();
     }
 
     @Override
-    public void render(StationSignBlockEntity be, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(WallStationSignBlockEntity be, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         Level level = be.getLevel();
         if (level == null) {
             return;
         }
         BlockState state = be.getBlockState();
-        if (!(state.getBlock() instanceof StationSignBlock)) {
+        if (!(state.getBlock() instanceof WallStationSignBlock)) {
             return;
         }
 
@@ -49,7 +49,7 @@ public class StationSignBlockEntityRenderer implements BlockEntityRenderer<Stati
             return;
         }
 
-        Direction facing = state.getValue(StationSignBlock.FACING);
+        Direction facing = state.getValue(WallStationSignBlock.FACING);
         RunInfo run = computeRun(level, be.getBlockPos(), facing);
 
         // Only the leftmost (in text-forward terms) block of a connected run draws - it draws the
@@ -98,7 +98,7 @@ public class StationSignBlockEntityRenderer implements BlockEntityRenderer<Stati
     }
 
     @Override
-    public AABB getRenderBoundingBox(StationSignBlockEntity be) {
+    public AABB getRenderBoundingBox(WallStationSignBlockEntity be) {
         // The leader block draws text that visually extends across the whole connected run, so its
         // culling box needs to cover that whole run - otherwise the text vanishes as soon as the
         // leader block itself (not the rest of the sign) leaves the screen/frustum.
@@ -108,11 +108,11 @@ public class StationSignBlockEntityRenderer implements BlockEntityRenderer<Stati
             return new AABB(pos);
         }
         BlockState state = be.getBlockState();
-        if (!(state.getBlock() instanceof StationSignBlock)) {
+        if (!(state.getBlock() instanceof WallStationSignBlock)) {
             return new AABB(pos);
         }
 
-        RunInfo run = computeRun(level, pos, state.getValue(StationSignBlock.FACING));
+        RunInfo run = computeRun(level, pos, state.getValue(WallStationSignBlock.FACING));
         BlockPos start = pos.relative(run.textForwardDir().getOpposite(), run.leftCount());
         BlockPos end = pos.relative(run.textForwardDir(), run.rightCount());
         return new AABB(start.getX(), start.getY(), start.getZ(), end.getX() + 1, end.getY() + 1, end.getZ() + 1);
@@ -135,7 +135,7 @@ public class StationSignBlockEntityRenderer implements BlockEntityRenderer<Stati
         BlockPos cursor = origin.relative(step);
         for (int i = 0; i < MAX_RUN_SCAN; i++) {
             BlockState state = level.getBlockState(cursor);
-            if (!(state.getBlock() instanceof StationSignBlock) || state.getValue(StationSignBlock.FACING) != requiredFacing) {
+            if (!(state.getBlock() instanceof WallStationSignBlock) || state.getValue(WallStationSignBlock.FACING) != requiredFacing) {
                 break;
             }
             count++;

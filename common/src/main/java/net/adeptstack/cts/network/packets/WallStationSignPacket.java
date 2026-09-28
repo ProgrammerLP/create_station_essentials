@@ -4,8 +4,8 @@ import de.mrjulsen.mcdragonlib.data.DLStatus;
 import de.mrjulsen.mcdragonlib.network.NetworkPacketContext;
 import de.mrjulsen.mcdragonlib.network.NetworkPacketData;
 import de.mrjulsen.mcdragonlib.util.NbtUtils;
-import net.adeptstack.cts.blockentities.StationSignBlockEntity;
-import net.adeptstack.cts.blocks.signBlocks.StationSignBlock;
+import net.adeptstack.cts.blockentities.WallStationSignBlockEntity;
+import net.adeptstack.cts.blocks.signBlocks.WallStationSignBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class StationSignPacket extends NetworkPacketData {
+public class WallStationSignPacket extends NetworkPacketData {
 
     private static final int MAX_RUN_SCAN = 64;
 
@@ -22,11 +22,11 @@ public class StationSignPacket extends NetworkPacketData {
     public int textColorId;
     public int bgColorId;
 
-    public StationSignPacket(DLStatus status) {
+    public WallStationSignPacket(DLStatus status) {
         super(status);
     }
 
-    public StationSignPacket(BlockPos pos, String text, DyeColor textColor, DyeColor bgColor) {
+    public WallStationSignPacket(BlockPos pos, String text, DyeColor textColor, DyeColor bgColor) {
         super(DLStatus.OK);
         this.pos = pos;
         this.text = text;
@@ -50,22 +50,22 @@ public class StationSignPacket extends NetworkPacketData {
         this.bgColorId = nbt.getInt("bgColor");
     }
 
-    public static void handle(StationSignPacket packet, NetworkPacketContext context) {
+    public static void handle(WallStationSignPacket packet, NetworkPacketContext context) {
         apply(packet, context);
     }
 
-    public static void apply(StationSignPacket packet, NetworkPacketContext context) {
+    public static void apply(WallStationSignPacket packet, NetworkPacketContext context) {
         context.queue(() -> {
             Level level = context.getPlayer().level();
             BlockState originState = level.getBlockState(packet.pos);
-            if (!(originState.getBlock() instanceof StationSignBlock)) {
+            if (!(originState.getBlock() instanceof WallStationSignBlock)) {
                 return;
             }
 
             String text = packet.text.length() > 64 ? packet.text.substring(0, 64) : packet.text;
             DyeColor textColor = DyeColor.byId(packet.textColorId);
             DyeColor bgColor = DyeColor.byId(packet.bgColorId);
-            Direction facing = originState.getValue(StationSignBlock.FACING);
+            Direction facing = originState.getValue(WallStationSignBlock.FACING);
 
             applyTo(level, packet.pos, originState, text, textColor, bgColor);
 
@@ -73,7 +73,7 @@ public class StationSignPacket extends NetworkPacketData {
                 BlockPos cursor = packet.pos.relative(side);
                 for (int i = 0; i < MAX_RUN_SCAN; i++) {
                     BlockState state = level.getBlockState(cursor);
-                    if (!(state.getBlock() instanceof StationSignBlock) || state.getValue(StationSignBlock.FACING) != facing) {
+                    if (!(state.getBlock() instanceof WallStationSignBlock) || state.getValue(WallStationSignBlock.FACING) != facing) {
                         break;
                     }
                     applyTo(level, cursor, state, text, textColor, bgColor);
@@ -84,10 +84,10 @@ public class StationSignPacket extends NetworkPacketData {
     }
 
     private static void applyTo(Level level, BlockPos pos, BlockState state, String text, DyeColor textColor, DyeColor bgColor) {
-        if (state.getValue(StationSignBlock.BG_COLOR) != bgColor) {
-            level.setBlockAndUpdate(pos, state.setValue(StationSignBlock.BG_COLOR, bgColor));
+        if (state.getValue(WallStationSignBlock.BG_COLOR) != bgColor) {
+            level.setBlockAndUpdate(pos, state.setValue(WallStationSignBlock.BG_COLOR, bgColor));
         }
-        if (level.getBlockEntity(pos) instanceof StationSignBlockEntity be) {
+        if (level.getBlockEntity(pos) instanceof WallStationSignBlockEntity be) {
             be.setContent(text, textColor);
         }
     }

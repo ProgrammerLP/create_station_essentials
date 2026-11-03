@@ -31,6 +31,10 @@ public class PlatformBlockCH extends PanelBlockBase {
 
     @Override
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        // Players who may not build (adventure, spectator) must not change the sign.
+        if (!player.mayBuild()) {
+            return InteractionResult.PASS;
+        }
         if (level.isClientSide) {
             ClientWrapper.openPlatformBlockCHScreen(pos, state);
         }

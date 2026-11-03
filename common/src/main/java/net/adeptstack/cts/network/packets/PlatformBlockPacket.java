@@ -9,7 +9,10 @@ import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class PlatformBlockPacket extends NetworkPacketData {
 
@@ -44,17 +47,28 @@ public class PlatformBlockPacket extends NetworkPacketData {
 
     public static void apply(PlatformBlockPacket packet, NetworkPacketContext context) {
         context.queue(() -> {
-            BlockState state = context.getPlayer().level().getBlockState(packet.pos);
-            if (packet.signblock >= 0) {
-                if (state.getBlock() instanceof PlatformBlockNL) {
-                    state = state.setValue(PlatformBlockNL.SIGN_BLOCKS, packet.signblock);
-                } else if (state.getBlock() instanceof PlatformBlockDE) {
-                    state = state.setValue(PlatformBlockDE.SIGN_BLOCKS, packet.signblock);
-                } else if (state.getBlock() instanceof PlatformBlockCH) {
-                    state = state.setValue(PlatformBlockCH.SIGN_BLOCKS, packet.signblock);
-                }
+            Player player = context.getPlayer();
+            Level level = player.level();
+            // The server decides: no changes from players who may not build (adventure, spectator),
+            // from too far away, or in unloaded chunks.
+            if (!player.mayBuild() || !level.isLoaded(packet.pos) || !player.canInteractWithBlock(packet.pos, 1.0)) {
+                return;
             }
-            context.getPlayer().level().setBlockAndUpdate(packet.pos, state);
+            BlockState state = level.getBlockState(packet.pos);
+            IntegerProperty property;
+            if (state.getBlock() instanceof PlatformBlockNL) {
+                property = PlatformBlockNL.SIGN_BLOCKS;
+            } else if (state.getBlock() instanceof PlatformBlockDE) {
+                property = PlatformBlockDE.SIGN_BLOCKS;
+            } else if (state.getBlock() instanceof PlatformBlockCH) {
+                property = PlatformBlockCH.SIGN_BLOCKS;
+            } else {
+                return;
+            }
+            if (!property.getPossibleValues().contains(packet.signblock)) {
+                return;
+            }
+            level.setBlockAndUpdate(packet.pos, state.setValue(property, packet.signblock));
         });
     }
 }

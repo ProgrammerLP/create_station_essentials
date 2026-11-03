@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "trainutilities:iso_wall_block_green"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "trainutilities:iso_wall_block_green"
+    }
+  ],
+  "result": {
+    "id": "tracksta:iso_wall_block_green",
+    "count": 1
+  }
+}

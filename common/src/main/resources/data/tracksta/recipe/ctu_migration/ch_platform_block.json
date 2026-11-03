@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "trainutilities:ch_platform_block"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "trainutilities:ch_platform_block"
+    }
+  ],
+  "result": {
+    "id": "tracksta:ch_platform_block",
+    "count": 1
+  }
+}

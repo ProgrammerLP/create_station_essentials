@@ -26,13 +26,15 @@
     ]
   },
   "mixins": [
-    "tracksta.mixins.json"
+    "tracksta.mixins.json",
+    "tracksta-fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15.11",
     "minecraft": "~1.20.1",
     "java": ">=17",
     "architectury": ">=9.2.14",
+    "forgeconfigapiport": ">=8.0.0",
     "fabric-api": "*"
   },
   "suggests": {

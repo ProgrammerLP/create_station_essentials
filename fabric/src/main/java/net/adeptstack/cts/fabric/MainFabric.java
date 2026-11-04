@@ -3,6 +3,7 @@ package net.adeptstack.cts.fabric;
 import net.fabricmc.api.ModInitializer;
 
 import net.adeptstack.cts.Main;
+import net.adeptstack.cts.fabric.migration.FabricCtuMigration;
 
 public final class MainFabric implements ModInitializer {
     @Override
@@ -13,6 +14,8 @@ public final class MainFabric implements ModInitializer {
 
         // Run our common setup.
         Main.init();
+        // Chunk scan hook and config for the CTU migration.
+        FabricCtuMigration.init();
 
         Main.REGISTRATE.register();
     }

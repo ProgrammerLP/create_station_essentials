@@ -5,6 +5,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import net.adeptstack.cts.Main;
+import net.adeptstack.cts.forge.migration.ForgeCtuMigration;
 
 @Mod(Main.MOD_ID)
 public final class MainForge {
@@ -14,5 +15,7 @@ public final class MainForge {
         Main.REGISTRATE.registerEventListeners(FMLJavaModLoadingContext.get().getModEventBus());
         // Run our common setup.
         Main.init();
+        // Registry remaps, chunk scan hook and config for the CTU migration.
+        ForgeCtuMigration.init();
     }
 }

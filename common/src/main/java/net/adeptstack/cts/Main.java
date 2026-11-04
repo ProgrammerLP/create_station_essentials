@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
+import net.adeptstack.cts.migration.CtuMigrationHandler;
 import net.adeptstack.cts.network.ModNetwork;
 import net.adeptstack.cts.registry.*;
 import net.createmod.catnip.lang.FontHelper;
@@ -23,6 +24,7 @@ public final class Main {
         ModBlockEntities.register();
         ModNetwork.init();
         ModTags.register();
+        CtuMigrationHandler.init();
     }
 
     public static ResourceLocation asResource(String path) {

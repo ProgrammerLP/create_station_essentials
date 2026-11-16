@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class WallStationSignBlockEntity extends BlockEntity {
 
-    public static final String DEFAULT_TEXT = "Bahnhof";
+    public static final String DEFAULT_TEXT = "Station";
 
     private String text = DEFAULT_TEXT;
     private DyeColor textColor = DyeColor.WHITE;

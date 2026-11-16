@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class StationSignDoubleBlockEntity extends BlockEntity {
 
-    public static final String DEFAULT_TEXT = "Bahnhof";
+    public static final String DEFAULT_TEXT = "Station";
 
     private String textA = DEFAULT_TEXT;
     private DyeColor textColorA = DyeColor.WHITE;

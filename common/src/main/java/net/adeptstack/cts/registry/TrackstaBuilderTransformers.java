@@ -3,6 +3,7 @@ package net.adeptstack.cts.registry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.adeptstack.cts.blocks.panelBlocks.IsoWallBlock;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
+import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockBlueTfl;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
 import net.adeptstack.cts.blocks.signBlocks.MastStationSignBlock;
@@ -49,6 +50,19 @@ public class TrackstaBuilderTransformers {
     public static BlockEntry<PlatformBlockCH> CHPlatformBlock(String id, MapColor color) {
         return REGISTRATE
                 .block(id, PlatformBlockCH::new)
+                .initialProperties(() -> Blocks.IRON_BARS)
+                .properties(p -> p.mapColor(color)
+                        .sound(SoundType.METAL))
+                .transform(pickaxeOnly())
+                .loot((lr, block) -> lr.add(block, lr.createSingleItemTable(block)))
+                .item()
+                .build()
+                .register();
+    }
+
+    public static BlockEntry<PlatformBlockBlueTfl> BlueTflPlatformBlock(String id, MapColor color) {
+        return REGISTRATE
+                .block(id, PlatformBlockBlueTfl::new)
                 .initialProperties(() -> Blocks.IRON_BARS)
                 .properties(p -> p.mapColor(color)
                         .sound(SoundType.METAL))

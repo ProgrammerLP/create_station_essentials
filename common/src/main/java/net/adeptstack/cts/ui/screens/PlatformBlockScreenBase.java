@@ -93,6 +93,8 @@ public class PlatformBlockScreenBase extends Screen {
                     msg = ToolTipUtils.GetNLPlatformBlockToolTipName(n);
                 } else if (typeID == 3) {
                     msg = ToolTipUtils.GetCHPlatformBlockToolTipName(n);
+                } else if (typeID == 4) {
+                    msg = ToolTipUtils.GetBlueTflPlatformBlockToolTipName(n);
                 }
                 addRenderableWidget(new BlockButton(guiLeft + MARGIN_LEFT + 1 + k * 20, guiTop + WINDOW_TOP_PART_HEIGHT + i * 20, (b) -> {
                     this.selectedVariant = startValue + n;

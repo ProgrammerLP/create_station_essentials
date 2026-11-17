@@ -3,6 +3,7 @@
   "values": [
     "tracksta:de_platform_block",
     "tracksta:nl_platform_block",
-    "tracksta:ch_platform_block"
+    "tracksta:ch_platform_block",
+    "tracksta:blue_tfl_platform_block"
   ]
 }

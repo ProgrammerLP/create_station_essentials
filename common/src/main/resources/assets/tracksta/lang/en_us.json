@@ -5,6 +5,7 @@
   "block.tracksta.de_platform_block": "German Platform Block",
   "block.tracksta.nl_platform_block": "Dutch Platform Block",
   "block.tracksta.ch_platform_block": "Swiss Platform Block",
+  "block.tracksta.blue_tfl_platform_block": "Blue TfL Platform Block",
 
   "advancement.tracksta.platform_block": "Modern Age!",
   "advancement.tracksta.platform_block.description": "Receive a Platform Block",
@@ -14,6 +15,7 @@
   "gui.tracksta.selection_screen.blockplacementscreen_de": "German Platform Blocks",
   "gui.tracksta.selection_screen.blockplacementscreen_nl": "Dutch Platform Blocks",
   "gui.tracksta.selection_screen.blockplacementscreen_ch": "Swiss Platform Blocks",
+  "gui.tracksta.selection_screen.blockplacementscreen_blue_tfl": "Blue TfL Platform Blocks",
 
   "block.tracksta.wall_station_sign_block": "Wall Station Name Sign",
   "block.tracksta.mast_station_sign_block": "One-Sided Station Name Sign",

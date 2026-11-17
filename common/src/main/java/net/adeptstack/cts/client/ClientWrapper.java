@@ -4,6 +4,7 @@ import net.adeptstack.cts.blockentities.MastStationSignBlockEntity;
 import net.adeptstack.cts.blockentities.StationSignDoubleBlockEntity;
 import net.adeptstack.cts.blockentities.WallStationSignBlockEntity;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
+import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockBlueTfl;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
 import net.adeptstack.cts.network.ModNetwork;
@@ -12,6 +13,7 @@ import net.adeptstack.cts.network.packets.PlatformBlockPacket;
 import net.adeptstack.cts.network.packets.StationSignDoublePacket;
 import net.adeptstack.cts.network.packets.WallStationSignPacket;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockCHPlacementScreen;
+import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockBlueTflPlacementScreen;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockDEPlacementScreen;
 import net.adeptstack.cts.ui.screens.platformBlocks.PlatformBlockNLPlacementScreen;
 import net.adeptstack.cts.ui.screens.signBlocks.StationSignDoubleScreen;
@@ -71,6 +73,22 @@ public class ClientWrapper {
                     ModNetwork.CHANNEL.sendToServer(new PlatformBlockPacket(pos, variant));
                         },
                     "gui." + MOD_ID + ".selection_screen.blockplacementscreen_ch", 3
+                )
+        );
+    }
+
+    public static void openPlatformBlockBlueTflScreen(BlockPos pos, BlockState blockState) {
+        Minecraft.getInstance().setScreen(
+                new PlatformBlockBlueTflPlacementScreen(
+                        blockState.getValue(PlatformBlockBlueTfl.SIGN_BLOCKS),
+                        PlatformBlockBlueTfl.SIGN_BLOCKS,
+                        (variant) -> {
+                            String name = TextureNames.GetBlueTflPlatformBlockTextureName(variant);
+                            return new PlatformBlockBlueTflPlacementScreen.TextureResult(new ResourceLocation(MOD_ID, "textures/block/blue_tfl_platformblocks/" + name), 256, 256);
+                        }, (variant) -> {
+                    ModNetwork.CHANNEL.sendToServer(new PlatformBlockPacket(pos, variant));
+                        },
+                    "gui." + MOD_ID + ".selection_screen.blockplacementscreen_blue_tfl", 4
                 )
         );
     }

@@ -55,4 +55,16 @@ public class ToolTipUtils {
         };
         return name;
     }
+
+    public static String GetBlueTflPlatformBlockToolTipName(int variant) {
+        String name = switch (variant) {
+            case 0 -> "0";
+            case 17 -> "A";
+            case 18 -> "B";
+            case 19 -> "C";
+            case 20 -> "-";
+            default -> variant + "";
+        };
+        return name;
+    }
 }

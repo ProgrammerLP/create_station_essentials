@@ -55,4 +55,16 @@ public class TextureNames {
         };
         return name;
     }
+
+    public static String GetBlueTflPlatformBlockTextureName(int variant) {
+        String name = switch (variant) {
+            case 0 -> "empty.png";
+            case 17 -> "a.png";
+            case 18 -> "b.png";
+            case 19 -> "c.png";
+            case 20 -> "dash.png";
+            default -> variant + ".png";
+        };
+        return name;
+    }
 }

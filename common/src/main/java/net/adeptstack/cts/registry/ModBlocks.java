@@ -3,6 +3,7 @@ package net.adeptstack.cts.registry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.adeptstack.cts.blocks.panelBlocks.IsoWallBlock;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
+import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockBlueTfl;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
 import net.adeptstack.cts.blocks.signBlocks.MastStationSignBlock;
@@ -22,6 +23,9 @@ public class ModBlocks {
 
     public static final BlockEntry<PlatformBlockCH> CH_PLATFORM_BLOCK =
             TrackStaBuilderTransformers.CHPlatformBlock("ch_platform_block", MapColor.NONE);
+
+    public static final BlockEntry<PlatformBlockBlueTfl> BLUE_TFL_PLATFORM_BLOCK =
+            TrackStaBuilderTransformers.BlueTflPlatformBlock("blue_tfl_platform_block", MapColor.NONE);
 
     //noise isolation walls
     public static final BlockEntry<IsoWallBlock> ISO_WALL_BLOCK =

@@ -2,6 +2,7 @@ package net.adeptstack.cts.network.packets;
 
 import dev.architectury.networking.NetworkManager;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockCH;
+import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockBlueTfl;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockDE;
 import net.adeptstack.cts.blocks.panelBlocks.platformBlocks.PlatformBlockNL;
 import net.minecraft.core.BlockPos;
@@ -55,6 +56,8 @@ public class PlatformBlockPacket {
                 property = PlatformBlockDE.SIGN_BLOCKS;
             } else if (state.getBlock() instanceof PlatformBlockCH) {
                 property = PlatformBlockCH.SIGN_BLOCKS;
+            } else if (state.getBlock() instanceof PlatformBlockBlueTfl) {
+                property = PlatformBlockBlueTfl.SIGN_BLOCKS;
             } else {
                 return;
             }
